@@ -21,13 +21,13 @@ class ProfileView(generic.TemplateView):
 
 #profile作成
 class ProfileCreateView(generic.CreateView):
-    model = User
+    model = User_info
     template_name = "profile_create.html"
 
 
 #profileアップデート
 class ProfileUpdateView(generic.UpdateView):
-    model = User
+    model = User_info
     template_name = "profile_update.html"
 #======================================================
 
