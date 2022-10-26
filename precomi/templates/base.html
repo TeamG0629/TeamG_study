@@ -3,15 +3,14 @@
 <head>
 <meta charset="UTF-8">
 <title>フレコミ</title>
-<link rel="stylesheet" href="
- ]'css/style.css' %}">
+<link rel="stylesheet" href="{% static 'css/style.css' %}">
 </head>
 <body>
 
   <!--ヘッダー-->
   <header>
-    <h1><a href="#"><img src="images/logo.png" alt="フラワーアレンジメント教室ブルーム" ></a></h1>
-    <div id="header_contact"><a href="contact.html"><img src="images/btn_contact.jpg" alt="お問い合わせ"></a></div>
+    <h1><a href="#"><img src="{% static 'images/logo.png' %}" alt="フラワーアレンジメント教室ブルーム" ></a></h1>
+    <div id="header_contact"><a href="contact.html"><img src="{% static 'images/btn_contact.jpg' %}" alt="お問い合わせ"></a></div>
     <nav id="global_navi">
       <ul>
         <li class="current"><a href="index.html">HOME</a></li>
