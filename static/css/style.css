@@ -48,7 +48,13 @@ header h1 {
 header #header_contact {
   float: right;
   margin: 35px 0 0;
-} 
+}
+#phone_button{
+  display: block;
+  position:fixed;
+  height:100px;
+  right:10px;
+}
 #global_navi {
   width: 980px;
   clear: both;
