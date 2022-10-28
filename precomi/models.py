@@ -1,4 +1,5 @@
 from django.db import models
+from django.utils import timezone
 
 
 
@@ -29,10 +30,25 @@ class User(models.Model):
         db_table = 'User_info'
 
 
-#日記モデル
+#日記モデル(画像5枚、タイトル、コメント、日付)
 class Diary(models.Model):
+    tittle = models.CharField(max_length=50,null=False)
+    comment = models.CharField(max_length=100,null=True)
+    date = models.DateField(default=timezone.now)
+    image1 = models.ForeignKey(User)
+    image2 = models.ForeignKey(User)
+    image3 = models.ForeignKey(User)
+    image4 = models.ForeignKey(User)
+    image5 = models.ForeignKey(User)
+    class Meta:
+        db_table = 'diary_info'
 
-
-#トークチャットモデル
+#トークチャットモデル(名前、性別、ユーザID、ユーザタイプ、画像1枚)
 class Talkchat(models.Model):
-    
+    name = models.ForeignKey(User)
+    sex = models.ForeignKey(User)
+    user_id = models.ForeignKey(User)
+    user_type = models.ForeignKey(User)
+    image = models.ForeignKey(User)
+    class Meta:
+        db_table = 'tc_info'
