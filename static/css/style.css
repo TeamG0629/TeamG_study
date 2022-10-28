@@ -314,3 +314,25 @@ footer small {
 #entry #submit_button:hover {
   background-color: #c7ae81;
 }
+
+
+/* 丸 */
+.circle {
+    width: 60%;
+    border-radius: 50%;
+    position: relative;
+    overflow: hidden;
+}
+.circle::before{
+    content: "";
+    display: block;
+    padding-top: 70%;
+}
+.circle img{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
