@@ -14,6 +14,9 @@ class TalkView(generic.TemplateView):
 class ProView(generic.TemplateView):
     template_name = "profile.html"
 
+class EditView(generic.TemplateView):
+    template_name = "edit.html"
+
 
 
 # #プロフィール===============================================
