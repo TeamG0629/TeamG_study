@@ -11,6 +11,9 @@ class IndexView(generic.TemplateView):
 class TalkView(generic.TemplateView):
     template_name = "talk.html"
 
+#notice.htmlに飛ばす
+class NoticeView(generic.TemplateView):
+    template_name = 'notice.html'
 
 
 # #プロフィール===============================================
