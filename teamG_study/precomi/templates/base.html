@@ -16,12 +16,19 @@
         <li><a href="#">日記</a></li>
         <li><a href="#">1vs1</a></li>
         <li><a href="#">コミュニティ</a></li>
+        {% if user.is_authenticated %}
+        <li><a href="#">ログアウト</a></li>
+        {% else %}
         <li><a href="#">ログイン</a></li>
+        {% endif %}
       </ul>
     </nav>
     <div id="phone_button"><a href="contact.html"><img src="{% static 'images/phone.png' %}" alt="お問い合わせ"></a></div>
   </header>
   <!--/ヘッダー-->
+  <!--コンテント-->
+   {% block contents%}{% endblock %}
+  <!--/コンテント-->
   <!--フッター-->
   <footer>
     <div id="footer_nav">
