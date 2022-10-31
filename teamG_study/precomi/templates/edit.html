@@ -3,29 +3,8 @@
 <html lang="ja">
 <head>
     <meta charset="UTF-8">
-    <title>プロフィール</title>
-    <meta name="description" content="プロフィール">
-    <script>
-		window.addEventListener('load', function(){
-
-			window.addEventListener('online', function(){
-				checkOnline();
-			});
-
-			window.addEventListener('offline', function(){
-				checkOnline();
-			});
-
-		});
-
-		function checkOnline() {
-			if( navigator.onLine ) {
-				console.log("オンライン中");
-			} else {
-				console.log("オフラインになりました");
-			}
-		}
-	</script>
+    <title>プロフィール編集</title>
+    <meta name="description" content="プロフィール編集">
 </head>
 {% block contents%}
 <body>
