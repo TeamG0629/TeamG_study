@@ -12,7 +12,7 @@
     <h1><a href="#"><img src="{% static 'images/logo.png' %}" alt="メインロゴ" ></a></h1>
     <nav id="global_navi">
       <ul>
-        <li class="current"><a href="#">HOME</a></li>
+        <li class="current"><a href="{% url 'precomi:profile' %}">プロフィール</a></li>
         <li><a href="#">日記</a></li>
         <li><a href="{% url 'precomi:talk' %}">コミュニティ</a></li>
         {% if user.is_authenticated %}
@@ -31,7 +31,7 @@
   <footer>
     <div id="footer_nav">
       <ul>
-        <li><a href="#">HOME</a></li>
+        <li><a href="{% url 'precomi:profile' %}">プロフィール</a></li>
         <li><a href="#">日記</a></li>
         <li><a href="{% url 'precomi:talk' %}">コミュニティ</a></li>
         <li><a href="#">ログイン</a></li>

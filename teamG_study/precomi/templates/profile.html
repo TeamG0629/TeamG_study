@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+{% load static %}
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>プロフィール</title>
+    <meta name="description" content="プロフィール">
+    <script>
+		window.addEventListener('load', function(){
+
+      // オンラインになったら実行
+			window.addEventListener('online', function(){
+				checkOnline();
+			});
+
+      // オフラインになったら実行
+			window.addEventListener('offline', function(){
+				checkOnline();
+			});
+
+		});
+
+		function checkOnline() {
+			if( navigator.onLine ) {
+				console.log("オンライン中");
+			} else {
+				console.log("オフラインになりました");
+			}
+		}
+	</script>
+</head>
+<body>
+    <div>
+        <form action="test.html" method="post" enctype="multipart/form-data" >
+    <div>
+        <input type="file" name="test" multiple/>
+    </div>
+        </form>
+    </div>
+    <p>
+        <button type="button">編集</button>
+        週　日　妊娠　か月
+        名前：
+        出産予定日
+        ・生年月日：
+        ・年齢：
+        ・月経周期：
+        ・出産予定日：
+        ・血液型：
+        ・緊急連絡先：
+        コメント欄
+    </p>
+</body>
+</html>
