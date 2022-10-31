@@ -336,18 +336,19 @@ footer small {
   height: 100%;
   object-fit: cover;
 }
-#circle {
-  margin-left: auto;
-  margin-right: auto;
-  width: 50em
+/*写真を真ん中に配置 */
+#circle{
+    display: block;
+    margin-left: auto;
+    margin-right: auto 
 }
 /*緊急通知ボタン右下*/
 #pos{
     position:absolute;
     bottom:0%;
     right:0%;
-}
-pos img{
+
+#pos img{
     border:1px solid #cccccc;
     height: 100px;
     position: relative;
