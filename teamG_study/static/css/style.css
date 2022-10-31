@@ -317,18 +317,18 @@ footer small {
 
 
 /* 丸 */
-.circle {
+#circle {
     width: 60%;
     border-radius: 50%;
     position: relative;
     overflow: hidden;
 }
-.circle::before{
+#circle::before{
     content: "";
     display: block;
     padding-top: 70%;
 }
-.circle img{
+#circle img{
     position: absolute;
     top: 0;
     left: 0;
@@ -336,18 +336,18 @@ footer small {
     height: 100%;
     object-fit: cover;
 }
-  .circle {
+#circle {
     margin-left: auto;
     margin-right: auto;
     width: 50em
 }
 /*緊急通知ボタン右下*/
-.pos{
+#pos{
     position:absolute;
     bottom:0%;
     right:0%;
 }
-.pos img{
+pos img{
     border:1px solid #cccccc;
     height: 100px;
     position: relative;

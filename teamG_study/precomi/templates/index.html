@@ -1,21 +1,24 @@
 {% extends 'base.html' %}
 {% load static %}
-
+<head>
+  <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
 {% block contents%}
 <div id="main visual">
   <img src="{% static 'images/01.jpg' %}">
+  <div id="phone_button"><a href="contact.html"><img src="{% static 'images/phone.png' %}" alt=""></a></div>
 </div>
 {% endblock %}
 
 
 <style>
-  .circle {
+ .circle {
       width: 60%;
       border-radius: 50%;
       position: relative;
       overflow: hidden;
   }
-  .circle::before{
+ .circle::before{
       content: "";
       display: block;
       padding-top: 70%;
@@ -28,7 +31,7 @@
       height: 100%;
       object-fit: cover;
   }
-  .circle {
+ .circle {
     margin-left: auto;
     margin-right: auto;
     width: 50em
