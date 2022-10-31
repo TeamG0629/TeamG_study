@@ -1,9 +1,11 @@
 {% extends 'base.html' %}
 {% load static %}
 
-<body>
+{% block header%}
+<header>
    <a href="#"><img src="{% static 'images/01.jpg' %}" alt="" ></a>
-</body>
+</header>
+{% endblock %}
 
 <style>
   .circle {
