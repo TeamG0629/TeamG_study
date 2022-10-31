@@ -317,18 +317,18 @@ footer small {
 
 
 /* 丸 */
-.circle {
+#circle {
     width: 60%;
     border-radius: 50%;
     position: relative;
     overflow: hidden;
 }
-.circle::before{
+#circle::before{
     content: "";
     display: block;
     padding-top: 70%;
 }
-.circle img{
+#circle img{
     position: absolute;
     top: 0;
     left: 0;
