@@ -316,30 +316,30 @@ footer small {
 }
 
 
-/* 丸 */
+/* 丸　赤ちゃんの写真 */
 #circle {
-    width: 60%;
-    border-radius: 50%;
-    position: relative;
-    overflow: hidden;
+  width: 60%;
+  border-radius: 50%;
+  position: relative;
+  overflow: hidden;
 }
 #circle::before{
-    content: "";
-    display: block;
-    padding-top: 70%;
+  content: "";
+  display: block;
+  padding-top: 70%;
 }
 #circle img{
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 #circle {
-    margin-left: auto;
-    margin-right: auto;
-    width: 50em
+  margin-left: auto;
+  margin-right: auto;
+  width: 50em
 }
 /*緊急通知ボタン右下*/
 #pos{
