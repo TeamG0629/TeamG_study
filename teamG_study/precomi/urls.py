@@ -4,7 +4,7 @@ from .import views
 app_name = 'precomi'
 urlpatterns = [
     path('',views.IndexView.as_view(),name="index"),
-    path('notice/',views.NoticeView.as_view(),name="notice"),
+    path('talk/',views.TalkView.as_view(),name="talk"),
     # path('profile/',views.ProfileView(),name="profile"),
     # path('profile-create',views.ProfileCreateView(),name="profile_create"),
     # path('profile-update',views.ProfileUpdateView(),name="profile_update"),

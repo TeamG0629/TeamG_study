@@ -316,7 +316,7 @@ footer small {
 }
 
 
-/* 丸　赤ちゃんの写真 */
+/* 丸赤ちゃんの写真 */
 #circle {
   width: 60%;
   border-radius: 50%;
@@ -336,19 +336,38 @@ footer small {
   height: 100%;
   object-fit: cover;
 }
-#circle {
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
+/*写真を真ん中に配置 */
+#circle{
+    display: block;
+    margin-left: auto;
+    margin-right: auto 
 }
 /*緊急通知ボタン右下*/
 #pos{
     position:absolute;
     bottom:0%;
     right:0%;
-}
-pos img{
+
+#pos img{
     border:1px solid #cccccc;
-    height: 50px;
+    height: 100px;
     position: relative;
+}
+
+.DivLink{
+    position:relative;
+    width:280px;
+    height:96px;
+    background-color:#fffbb6;
+    border:1px solid #ff6a00;
+}
+
+.DivLink .Link{
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+
 }
