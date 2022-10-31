@@ -1,12 +1,15 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block contents %}
-<div class="container">
-    <div class="row">
-        <div class="my-div-style">
+<head>
+  <link rel="stylesheet" href="{% static 'css/mystyle.css' %}">
+</head>
+<div id="mystyle">
+    <div>
+        <div>
             <img src="{% static 'images/loginicon.png' %}">
             <h1>Log In</h1>
-            <form method="post" action="#">
+            <form method="post" action="#" id="text-align-p">
                 {% csrf_token %}
 
                 {{ form.as_p }}
