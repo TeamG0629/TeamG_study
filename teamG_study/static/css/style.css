@@ -38,7 +38,7 @@ img {vertical-align: bottom;}
   padding: 4px 9px 4px 14px;
 }
 header {
-  width: 980px;
+  width: 800px;
   margin: 0 auto;
 }
 header h1 {
@@ -318,7 +318,7 @@ footer small {
 
 /* 丸赤ちゃんの写真 */
 #circle {
-  width: 60%;
+  width: 50%;
   border-radius: 50%;
   position: relative;
   overflow: hidden;
@@ -336,7 +336,7 @@ footer small {
   height: 100%;
   object-fit: cover;
 }
-/*写真を真ん中に配置 */
+/*写真を真ん中に配置  */
 #circle{
     display: block;
     margin-left: auto;
