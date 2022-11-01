@@ -1,6 +1,8 @@
 from django.urls import path
 from .import views
 
+
+
 app_name = 'precomi'
 urlpatterns = [
     path('',views.IndexView.as_view(),name="index"),
@@ -14,3 +16,6 @@ urlpatterns = [
     # path('diary-update',views.DiaryUpdateView(),name="diary_update"),
     # path('diary-delete',views.DiaryDeleteView(),name="diary_delete"),
 ]
+
+
+

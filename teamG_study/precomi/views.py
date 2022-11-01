@@ -2,6 +2,8 @@ from django.shortcuts import render
 from django.views import generic
 
 
+
+
 #index.htmlに飛ばす
 class IndexView(generic.TemplateView):
     template_name = "index.html"

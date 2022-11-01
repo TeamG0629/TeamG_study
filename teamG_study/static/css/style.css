@@ -374,13 +374,13 @@ footer small {
 
 .DivLink{
     position:relative;
-    width:100px;
-    height:40px;
+    width:280px;
+    height:96px;
     background-color:#fffbb6;
     border:1px solid #ff6a00;
 }
 
-#DivLink Link{
+.DivLink .Link{
     display: block;
     position: absolute;
     top: 0;
