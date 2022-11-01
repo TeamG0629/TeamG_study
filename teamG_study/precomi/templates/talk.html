@@ -5,19 +5,10 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
-    <link rel="stylesheet" href="{% static 'css/style.css' %}">
 </head>
 {% block contents%}
 <body>
-<form action="" method="get" style="text-align: center">
-    <input name="query" value="{{ request.GET.query }}" type="text" >
-    <button type="submit">検索する</button>
-</form>
 
-<div class="DivLink">
-    この枠全体がリンクになります。
-    <a class ="Link" href="https://creatorquest.jp/">CreatorQuest</a>
-</div>
 </body>
 {% endblock %}
 </html>
