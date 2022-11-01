@@ -15,8 +15,8 @@ class TalkView(generic.TemplateView):
 class ProfileView(generic.TemplateView):
     template_name = "profile.html"
 
-class EditView(generic.TemplateView):
-    template_name = "edit.html"
+# class EditView(generic.TemplateView):
+#     template_name = "edit.html"
 
 
 
