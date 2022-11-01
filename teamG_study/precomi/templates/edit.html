@@ -9,6 +9,9 @@
 {% block contents%}
 <body>
     <div>
+        <button type="button"><a href="{% url 'precomi:profile' %}">完了</a></button>
+    </div>
+    <div>
         <form action="test.html" method="post" enctype="multipart/form-data" >
     <div>
         <input type="file" name="test" multiple/>
@@ -16,7 +19,6 @@
         </form>
     </div>
     <p>
-        <button type="button">編集</button>
         週　日　妊娠　か月
         名前：
         出産予定日

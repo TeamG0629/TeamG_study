@@ -9,13 +9,12 @@
 
   <!--ヘッダー-->
   <header>
-    <h1><a href="#"><img src="{% static 'images/logo.png' %}" alt="赤ちゃんの写真" ></a></h1>
+    <h1><a href="{% url 'precomi:index' %}"><img src="{% static 'images/logo.png' %}" alt="赤ちゃんの写真" ></a></h1>
     <nav id="global_navi">
       <ul>
-        <li class="current"><a href="#">HOME</a></li>
+        <li class="current"><a href="{% url 'precomi:profile' %}">プロフィール</a></li>
         <li><a href="#">日記</a></li>
-        <li><a href="#">1vs1</a></li>
-        <li><a href="#">コミュニティ</a></li>
+        <li><a href="{% url 'precomi:talk' %}">コミュニティ</a></li>
 <!--        {% if user.is_authenticated %}-->
 <!--        <li><a href="#">ログアウト</a></li>-->
 <!--        {% else %}-->
@@ -35,8 +34,7 @@
       <ul>
         <li><a href="#">HOME</a></li>
         <li><a href="#">日記</a></li>
-        <li><a href="#">1vs1</a></li>
-        <li><a href="#">コミュニティ</a></li>
+        <li><a href="{% url 'precomi:talk' %}">コミュニティ</a></li>
         <li><a href="#">ログイン</a></li>
       </ul>
     </div>

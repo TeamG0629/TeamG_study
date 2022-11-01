@@ -11,7 +11,7 @@ class IndexView(generic.TemplateView):
 class TalkView(generic.TemplateView):
     template_name = "talk.html"
 
-class ProView(generic.TemplateView):
+class ProfileView(generic.TemplateView):
     template_name = "profile.html"
 
 class EditView(generic.TemplateView):
