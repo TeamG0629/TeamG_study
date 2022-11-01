@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+{% load static %}
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>プロフィール</title>
+    <meta name="description" content="プロフィール">
+    <script>
+		window.addEventListener('load', function(){
+
+			window.addEventListener('online', function(){
+				checkOnline();
+			});
+
+			window.addEventListener('offline', function(){
+				checkOnline();
+			});
+
+		});
+
+		function checkOnline() {
+			if( navigator.onLine ) {
+				console.log("オンライン中");
+			} else {
+				console.log("オフラインになりました");
+			}
+		}
+	</script>
+</head>
+{% block contents%}
+<body>
+    <div>
+        <button type="button"><a href="{% url 'precomi:edit' %}">編集</a></button>
+    </div>
+    <div>
+        <form action="test.html" method="post" enctype="multipart/form-data" >
+    <div>
+        <input type="file" name="test" multiple/>
+    </div>
+        </form>
+    </div>
+    <div class="p-5">
+          <img class="img-fluid rounded-circle" src="{% static 'images/01.jpg' %}" alt="">
+        </div>
+
+    <p>
+        週　日　妊娠　か月
+        名前：
+        出産予定日
+        ・生年月日：
+        ・年齢：
+        ・月経周期：
+        ・出産予定日：
+        ・血液型：
+        ・緊急連絡先：
+        コメント欄
+    </p>
+</body>
+</html>
+{% endblock %}

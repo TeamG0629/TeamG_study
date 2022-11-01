@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% load static %}
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>プロフィール編集</title>
+    <meta name="description" content="プロフィール編集">
+</head>
+{% block contents%}
+<body>
+    <div>
+        <button type="button"><a href="{% url 'precomi:profile' %}">完了</a></button>
+    </div>
+    <div>
+        <form action="test.html" method="post" enctype="multipart/form-data" >
+    <div>
+        <input type="file" name="test" multiple/>
+    </div>
+        </form>
+    </div>
+    <p>
+        週　日　妊娠　か月
+        名前：
+        出産予定日
+        ・生年月日：
+        ・年齢：
+        ・月経周期：
+        ・出産予定日：
+        ・血液型：
+        ・緊急連絡先：
+        コメント欄
+    </p>
+</body>
+</html>
+{% endblock %}
