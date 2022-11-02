@@ -2,8 +2,6 @@ from django.shortcuts import render
 from django.views import generic
 
 
-
-
 #index.htmlに飛ばす
 class IndexView(generic.TemplateView):
     template_name = "index.html"
@@ -15,8 +13,8 @@ class TalkView(generic.TemplateView):
 class ProfileView(generic.TemplateView):
     template_name = "profile.html"
 
-# class EditView(generic.TemplateView):
-#     template_name = "edit.html"
+class EditView(generic.TemplateView):
+    template_name = "edit.html"
 
 
 
