@@ -15,11 +15,11 @@
         <li class="current"><a href="{% url 'precomi:profile' %}">プロフィール</a></li>
         <li><a href="#">日記</a></li>
         <li><a href="{% url 'precomi:talk' %}">コミュニティ</a></li>
-<!--        {% if user.is_authenticated %}-->
-<!--        <li><a href="#">ログアウト</a></li>-->
-<!--        {% else %}-->
+        {% if user.is_authenticated %}
+        <li><a href="#">ログアウト</a></li>
+        {% else %}
         <li><a href="#">ログイン</a></li>
-<!--        {% endif %}-->
+        {% endif %}
       </ul>
     </nav>
     <div id="phone_button"><a href="contact.html"><img src="{% static 'images/phone.png' %}" alt="お問い合わせ"></a></div>
