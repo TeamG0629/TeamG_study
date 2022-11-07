@@ -17,7 +17,8 @@ class ProfileView(generic.TemplateView):
 class EditView(generic.TemplateView):
     template_name = "edit.html"
 
-
+class NoticeView(generic.TemplateView):
+    template_name = "notice.html"
 
 # #プロフィール===============================================
 # #profile.htmlに飛ばす
