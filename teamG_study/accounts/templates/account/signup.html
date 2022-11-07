@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block contents %}
+<head>
+  <link rel="stylesheet" href="{% static 'css/mystyle.css' %}">
+</head>
+<div id="mystyle">
+    <div>
+        <div>
+            <img src="{% static 'images/loginicon.png' %}">
+            <h1>サインアップ</h1>
+            <form method="post" action="#" id="text-align-p">
+                {% csrf_token %}
+
+                {{ form.as_p }}
+
+                {% if redirect_field_value %}
+                    <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
+                {% endif %}
+
+                <button class="btn btn-primary" type="submit">登録</button>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}
