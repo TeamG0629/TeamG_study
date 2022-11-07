@@ -6,6 +6,7 @@ urlpatterns = [
     path('',views.IndexView.as_view(),name="index"),
     path('talk/',views.TalkView.as_view(),name="talk"),
     path('profile/',views.ProfileView.as_view(),name="profile"),
+    #path('precomi-list/',views.PrecomiListView.as_view(),name="precomi-list")
     # path('profile-create',views.ProfileCreateView(),name="profile_create"),
     # path('profile-update',views.ProfileUpdateView(),name="profile_update"),
     # path('diary/',views.DiaryView(),name="diary"),

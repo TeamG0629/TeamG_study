@@ -59,6 +59,10 @@ class EditView(generic.TemplateView):
 # class DiaryDeleteView(generic.DeleteView):
 #     model = Diary
 #     template_name = "diary_delete.html"
+
+#class PrecomiListView(LoginRequiredMixin, generic.ListView):
+#    model = Precomi
+#   template_name = 'precomi_list.html'
 # #======================================================
 
 
