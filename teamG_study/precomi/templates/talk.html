@@ -17,15 +17,14 @@
     <section  style="text-align:center">
         <select id="category_select" required>
             <option value="すべて" id="all_menu">選択してください</option>
-            {% for b in big_category %}
+                {% for b in big_category %}
             <option value="{{ b.title }}" id="{{ b.big_category_id }}">{{ b.title }}</option>
             {% endfor %}
         </select>
         <div class="list-container" id="list-container">
-        {% for item in item_all %}
+            {% for item in item_all %}
         <div class="product-box">
             <div class="product-txt-box">
-
                 {{ item.title }}<br>{{ item.price }}円（税込）
             </div>
         </div>
