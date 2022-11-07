@@ -16,9 +16,9 @@
         <li><a href="#">日記</a></li>
         <li><a href="{% url 'precomi:talk' %}">コミュニティ</a></li>
         {% if user.is_authenticated %}
-        <li><a href="#">ログアウト</a></li>
+        <li><a href="{% url 'account_logout' %}">ログアウト</a></li>
         {% else %}
-        <li><a href="#">ログイン</a></li>
+        <li><a href="{% url 'account_login' %}">ログイン</a></li>
         {% endif %}
       </ul>
     </nav>
