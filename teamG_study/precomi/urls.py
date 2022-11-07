@@ -7,6 +7,7 @@ urlpatterns = [
     path('talk/',views.TalkView.as_view(),name="talk"),
     path('profile/',views.ProfileView.as_view(),name="profile"),
     path('edit/',views.EditView.as_view(),name="edit"),
+    #path('precomi-list/',views.PrecomiListView.as_view(),name='precomi_list')
     # path('profile-create',views.ProfileCreateView(),name="profile_create"),
     # path('profile-update',views.ProfileUpdateView(),name="profile_update"),
     # path('diary/',views.DiaryView(),name="diary"),
