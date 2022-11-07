@@ -15,17 +15,33 @@
         <li class="current"><a href="{% url 'precomi:profile' %}">プロフィール</a></li>
         <li><a href="#">日記</a></li>
         <li><a href="{% url 'precomi:talk' %}">コミュニティ</a></li>
-<!--        {% if user.is_authenticated %}-->
-<!--        <li><a href="#">ログアウト</a></li>-->
-<!--        {% else %}-->
-        <li><a href="#">ログイン</a></li>
-<!--        {% endif %}-->
+        {% if user.is_authenticated %}
+        <li><a href="{% url 'account_logout' %}">ログアウト</a></li>
+        {% else %}
+          <li><a href="{% url 'account_login' %}">ログイン</a></li>
+          <li><a href="{% url 'account_signup' %}">サインアップ</a></li>
+        {% endif %}
       </ul>
     </nav>
 <!--    <div id="phone_button"><a href="contact.html"><img src="{% static 'images/phone.png' %}" alt="お問い合わせ"></a></div>-->
   </header>
   <!--/ヘッダー-->
   <!--コンテント-->
+  {% if messages %}
+          <div class="container">
+              <div class="row">
+                  <div class="my-div-style w-100">
+                      <ul class="messages" style="list-style: none;">
+                          {% for message in messages %}
+                          <li {% if message.tags %} class="{{ message.tags }}" {% endif %}>
+                              {{ message }}
+                          </li>
+                          {% endfor %}
+                      </ul>
+                  </div>
+              </div>
+          </div>
+        {% endif %}
    {% block contents%}{% endblock %}
   <!--/コンテント-->
   <!--フッター-->

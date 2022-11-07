@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% load static %}
+{% block active_login %}active{% endblock %}
 {% block contents %}
 <head>
   <link rel="stylesheet" href="{% static 'css/mystyle.css' %}">
@@ -9,7 +10,7 @@
         <div>
             <img src="{% static 'images/loginicon.png' %}">
             <h1>Log In</h1>
-            <form method="post" action="#" id="text-align-p">
+            <form method="post" action="{% url 'account_login' %}" id="text-align-p">
                 {% csrf_token %}
 
                 {{ form.as_p }}
@@ -19,7 +20,7 @@
                 {% endif %}
 
                 <button class="btn btn-primary" type="submit">ログイン</button>
-                <p><a class="button secondaryAction" href="#">パスワードを忘れましたか？</a></p>
+                <p><a class="button secondaryAction" href="{% url 'account_reset_password' %}">パスワードを忘れましたか？</a></p>
             </form>
         </div>
     </div>
