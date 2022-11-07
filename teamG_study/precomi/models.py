@@ -57,3 +57,4 @@ class Talkchat(models.Model):
     image = models.CharField(max_length=256,verbose_name='画像',null=True)
     class Meta:
         db_table = 'tc_info'
+
