@@ -1,6 +1,9 @@
 from django.shortcuts import render
 from django.views import generic
-
+import win32com.client
+import datetime
+import schedule
+import time
 
 #index.htmlに飛ばす
 class IndexView(generic.TemplateView):
@@ -12,8 +15,37 @@ class TalkView(generic.TemplateView):
     template_name = "talk.html"
 
 #notice.htmlに飛ばす
-class NoticeView(generic.TemplateView):
-    template_name = 'notice.html'
+# class NoticeView(generic.TemplateView):
+#     template_name = 'notice.html'
+
+class NoticeView():
+    # outlookを開く
+    outlook = win32com.client.Dispatch("Outlook.Application")
+    mail = outlook.CreateItem(0)
+    # ykh2135と@stu.o-hara.ac.jpの入力を省く。送り先
+    mail.to = 'ykh2135238@stu.o-hara.ac.jp'
+    mail.cc = ''
+    mail.bcc = ''
+    mail.subject = 'pythonプログラムから'
+    mail.bodyFormat = 1
+    mail.body = '''お疲れ様です。tsetです。
+
+      testです。メッセージはきましたか？
+      '''
+
+    # 確認画面
+    # mail.display(True)
+    # 自動送信
+    mail.Send()
+
+    # schedule.every().day.at("14:15").do(job)
+
+
+    schedule.every(10).seconds.do(job)
+
+    while True:
+        schedule.run_pending()
+        time.sleep(60)
 
 
 # #プロフィール===============================================
