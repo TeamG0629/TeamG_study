@@ -18,7 +18,8 @@
         {% if user.is_authenticated %}
         <li><a href="{% url 'account_logout' %}">ログアウト</a></li>
         {% else %}
-        <li><a href="{% url 'account_login' %}">ログイン</a></li>
+          <li><a href="{% url 'account_login' %}">ログイン</a></li>
+          <li><a href="{% url 'account_signup' %}">サインアップ</a></li>
         {% endif %}
       </ul>
     </nav>
