@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
+{% load django_bootstrap5 %}
 {% load static %}
-
+{% block active_signup %}active{% endblock %}
 {% block contents %}
 <head>
   <link rel="stylesheet" href="{% static 'css/mystyle.css' %}">
@@ -10,10 +11,10 @@
         <div>
             <img src="{% static 'images/loginicon.png' %}">
             <h1>サインアップ</h1>
-            <form method="post" action="#" id="text-align-p">
+            <form method="post" action="{% url 'account_signup' %}" id="text-align-p">
                 {% csrf_token %}
 
-                {{ form.as_p }}
+                {% bootstrap_form form %}
 
                 {% if redirect_field_value %}
                     <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
