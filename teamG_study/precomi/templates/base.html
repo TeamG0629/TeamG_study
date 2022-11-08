@@ -13,7 +13,7 @@
     <nav id="global_navi">
       <ul>
         <li class="current"><a href="{% url 'precomi:profile' %}">プロフィール</a></li>
-        <li><a href="#">日記</a></li>
+        <li><a href="{% url 'precomi:diary' %}">日記</a></li>
         <li><a href="{% url 'precomi:talk' %}">コミュニティ</a></li>
         {% if user.is_authenticated %}
         <li><a href="{% url 'account_logout' %}">ログアウト</a></li>
