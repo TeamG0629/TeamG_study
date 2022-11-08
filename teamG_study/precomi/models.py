@@ -9,12 +9,12 @@ from django.core.validators import MaxValueValidator, MinValueValidator
 class User(models.Model):
     no = models.CharField(max_length=11,verbose_name='主キー',primary_key=True)
     name = models.CharField(max_length=20,verbose_name='名前',null=False)
-    datebirth = models.DateTimeField(verbose_name='生年月日',null=True)
+    datebirth = models.IntegerField(verbose_name='生年月日',null=True)
     sex = models.CharField(max_length=1,verbose_name='性別',null=False)
     user_id = models.CharField(max_length=8,verbose_name='ユーザID',null=False)
     user_pass = models.CharField(max_length=10,verbose_name='ユーザパスワード',null=False)
     telnum = models.CharField(max_length=12,verbose_name='電話番号',null=False)
-    precycle = models.IntegerField(validators=[MinValueValidator(8),MaxValueValidator(8)],verbose_name='妊娠周期',null=False)
+    precycle = models.IntegerField(verbose_name='妊娠周期',null=False)
     bloodtype = models.CharField(max_length=2,verbose_name='血液型',null=True)
     symptoms = models.CharField(max_length=100,verbose_name='症状',null=True)
     user_type = models.CharField(max_length=1,verbose_name='ユーザタイプ',null=False)
@@ -24,7 +24,7 @@ class User(models.Model):
     image3 = models.CharField(max_length=256,verbose_name='画像3',null=True)
     image4 = models.CharField(max_length=256,verbose_name='画像4',null=True)
     image5 = models.CharField(max_length=256,verbose_name='画像5',null=True)
-    last_login = models.DateTimeField(max_length=8,verbose_name='最終ログイン',null=False)
+    last_login = models.DateTimeField(max_length=8,verbose_name='最終ログイン',auto_now=True)
 
 
     class Meta:
