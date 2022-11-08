@@ -155,14 +155,13 @@ header #header_contact {
 }
 footer {
   background-color: #352b23;
-  position: absolute;/*←絶対位置*/
-  bottom: 0; /*下に固定*/
+  position: absolute;
+  bottom: 0;
   text-align: center;
   width: 100%;
   color: #fff;
 }
 footer #footer_nav {
-  background-color: #efefef;
   padding: 10px 0;
 }
 footer #footer_nav ul {
