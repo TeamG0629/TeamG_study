@@ -7,7 +7,7 @@ from .models import User
 class UserCreateForm(forms.ModelForm):
     class Meta:
         model = User
-        fields = ('name','datebirth','sex','telnum','precycle','bloodtype','symptoms')
+        fields = ('name','datebirth','sex','telnum','precycle','bloodtype','symptoms','image1')
     def __int__(self,args,**kwargs):
         super().__init__(*args,**kwargs)
         for fields in self.fields.values():

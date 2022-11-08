@@ -25,8 +25,20 @@ class ProfileView(generic.ListView):
 class ProfileUpdateView(LoginRequiredMixin,generic.UpdateView):
     model = User
     template_name = "profile_update.html"
-    form_class = UserUpdateForm
-    
+    form_class = UserCreateForm
+    def get_queryset(self):
+        return reverse_lazy('precomi:profile', kwargs={'pk': self.kwargs['pk']})
+
+    def form_valid(self, form):
+        messages.success(self.request,'更新しました')
+        return super().form_valid(form)
+
+    def form_invalid(self, form):
+        messages.error(self.request,"更新に失敗しました")
+        return super().form_invalid(form)
+
+
+
 
 #緊急通知の画面に飛ばす
 class NoticeView(generic.TemplateView):

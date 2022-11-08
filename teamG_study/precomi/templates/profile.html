@@ -7,8 +7,11 @@
     <div>
         <button type="button"><a href="{% url 'precomi:profile_create' %}">新規</a></button>
     </div>
-<!--for文でmodelのuserの情報を表示(名前、性別、生年月日、血液型、月経周期、電話番号)-->
+<!--for文でmodelのuserの情報を表示(画像、名前、性別、生年月日、血液型、月経周期、電話番号、症状)-->
         {% for i in user_list %}
+                {% if i.image1 %}
+                        <img id="img_wrap" src="{{i.image1.url}}" width="200" height="200"></img>
+                {% endif %}
                 <h2>
                     名前:{{ i.name }}
                 </h2>
@@ -26,6 +29,9 @@
                 </h2>
                 <h2>
                     電話番号:{{i.telnum}}
+                </h2>
+                <h2>
+                    症状:{{i.symptoms}}
                 </h2>
         {% endfor %}
 {% endblock %}

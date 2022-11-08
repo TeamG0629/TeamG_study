@@ -19,11 +19,11 @@ class User(models.Model):
     symptoms = models.CharField(max_length=100,verbose_name='症状',null=True)
     user_type = models.CharField(max_length=1,verbose_name='ユーザタイプ',null=False)
     hospitalname = models.CharField(max_length=50,verbose_name='病院名',null=True)
-    image1 = models.CharField(max_length=256,verbose_name='画像1',null=True)
-    image2 = models.CharField(max_length=256,verbose_name='画像2',null=True)
-    image3 = models.CharField(max_length=256,verbose_name='画像3',null=True)
-    image4 = models.CharField(max_length=256,verbose_name='画像4',null=True)
-    image5 = models.CharField(max_length=256,verbose_name='画像5',null=True)
+    image1 = models.ImageField(verbose_name='画像1',null=True)
+    image2 = models.ImageField(verbose_name='画像2',null=True)
+    image3 = models.ImageField(verbose_name='画像3',null=True)
+    image4 = models.ImageField(verbose_name='画像4',null=True)
+    image5 = models.ImageField(verbose_name='画像5',null=True)
     last_login = models.DateTimeField(max_length=8,verbose_name='最終ログイン',auto_now=True)
 
 
@@ -40,11 +40,11 @@ class Diary(models.Model):
     tittle = models.CharField(max_length=50,verbose_name='タイトル',null=False)
     comment = models.CharField(max_length=100,verbose_name='コメント',null=True)
     date = models.DateField(default=timezone.now,verbose_name='日付')
-    image1 = models.CharField(max_length=256,verbose_name='画像1',null=True)
-    image2 = models.CharField(max_length=256,verbose_name='画像2',null=True)
-    image3 = models.CharField(max_length=256,verbose_name='画像3',null=True)
-    image4 = models.CharField(max_length=256,verbose_name='画像4',null=True)
-    image5 = models.CharField(max_length=256,verbose_name='画像5',null=True)
+    image1 = models.ImageField(verbose_name='画像1',null=True)
+    image2 = models.ImageField(verbose_name='画像2',null=True)
+    image3 = models.ImageField(verbose_name='画像3',null=True)
+    image4 = models.ImageField(verbose_name='画像4',null=True)
+    image5 = models.ImageField(verbose_name='画像5',null=True)
     class Meta:
         db_table = 'diary_info'
 
@@ -54,7 +54,7 @@ class Talkchat(models.Model):
     sex = models.CharField(max_length=1,verbose_name='性別',null=False)
     user_id = models.CharField(max_length=8,verbose_name='ユーザID',null=False)
     user_type = models.CharField(max_length=1,verbose_name='ユーザタイプ',null=False)
-    image = models.CharField(max_length=256,verbose_name='画像',null=True)
+    image = models.ImageField(verbose_name='画像',null=True)
     class Meta:
         db_table = 'tc_info'
 
