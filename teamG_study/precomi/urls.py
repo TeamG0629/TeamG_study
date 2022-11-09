@@ -15,5 +15,6 @@ urlpatterns = [
     # path('diary-create',views.DiaryCreateView(),name="diary_create"),
     # path('diary-update',views.DiaryUpdateView(),name="diary_update"),
     # path('diary-delete',views.DiaryDeleteView(),name="diary_delete"),
+    #path('diary-detail/<int:pk>/', views.DiaryDetailView.as_view(), name="diary_detail"),
 ]
 

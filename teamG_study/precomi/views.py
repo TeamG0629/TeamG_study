@@ -69,7 +69,16 @@ class ProfileCreateView(LoginRequiredMixin, generic.CreateView):
 class DiaryView(generic.TemplateView):
     template_name = "diary.html"
 #
-#
+#     def get_queryset(self):
+#         diaries = Diary.objects.filter(user=self.request.user).order_by('-created_at')
+#         return diaries
+
+#diary詳細
+# class DiaryDetailView(LoginRequiredMixin, OnlyYouMixin, generic.DetailView):
+#     model = Diary
+#     template_name = 'diary_detail.html'
+
+
 # #diary作成
 # class DiaryCreateView(generic.CreateView):
 #     model = Diary
