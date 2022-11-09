@@ -66,8 +66,8 @@ class ProfileCreateView(LoginRequiredMixin, generic.CreateView):
 #
 # #日記===================================================
 # #diary.htmlに飛ばす
-# class DiaryView(generic.TemplateView):
-#     template_name = "diary.html"
+class DiaryView(generic.TemplateView):
+    template_name = "diary.html"
 #
 #
 # #diary作成
