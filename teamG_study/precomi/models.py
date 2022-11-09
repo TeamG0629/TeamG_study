@@ -7,7 +7,7 @@ from django.core.validators import MaxValueValidator, MinValueValidator
 #プロフィールモデル
 #(主キー、名前、生年月日、性別、ユーザID、ユーザパスワード、電話番号、妊娠周期、血液型、症状、ユーザタイプ、病院名、画像5枚、最終ログイン)
 class User(models.Model):
-    no = models.CharField(max_length=11,verbose_name='主キー',primary_key=True)
+    no = models.AutoField(verbose_name='主キー',primary_key=True)
     name = models.CharField(max_length=20,verbose_name='名前',null=False)
     datebirth = models.IntegerField(verbose_name='生年月日',null=True)
     sex = models.CharField(max_length=1,verbose_name='性別',null=False)

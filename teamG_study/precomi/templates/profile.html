@@ -2,15 +2,22 @@
 {% load static %}
 {% block contents%}
     <div>
-        <button type="button"><a href="{% url 'precomi:profile_update' %}">編集</a></button>
+        <button type="button"><a href="{% url 'precomi:profile_update' object.pk %}">編集</a></button>
     </div>
     <div>
         <button type="button"><a href="{% url 'precomi:profile_create' %}">新規</a></button>
     </div>
 <!--for文でmodelのuserの情報を表示(画像、名前、性別、生年月日、血液型、月経周期、電話番号、症状)-->
+    {% if user.is_authenticated %}
+    <h1>ログイン</h1>
+    {% else %}
+    <h1>ログアウト</h1>
+    {% endif %}
         {% for i in user_list %}
                 {% if i.image1 %}
-                        <img id="img_wrap" src="{{i.image1.url}}" width="200" height="200"></img>
+                    <img src="{{ i.image1.url }}" />
+                {% else %}
+                    <p>失敗</p>
                 {% endif %}
                 <h2>
                     名前:{{ i.name }}
