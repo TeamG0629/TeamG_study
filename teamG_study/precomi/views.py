@@ -4,6 +4,10 @@ from .forms import UserCreateForm
 from  django.contrib.auth.mixins import LoginRequiredMixin,UserPassesTestMixin
 from .models import User
 from django.contrib import messages
+from django.urls import reverse_lazy
+
+from .forms import DiaryCreateForm
+from .models import Diary
 
 #index.htmlに飛ばす
 class IndexView(generic.TemplateView):
@@ -67,6 +71,7 @@ class ProfileCreateView(LoginRequiredMixin, generic.CreateView):
 # #日記===================================================
 # #diary.htmlに飛ばす
 class DiaryView(generic.TemplateView):
+    model = Diary
     template_name = "diary.html"
 #
 #     def get_queryset(self):
@@ -74,17 +79,29 @@ class DiaryView(generic.TemplateView):
 #         return diaries
 
 #diary詳細
-# class DiaryDetailView(LoginRequiredMixin, OnlyYouMixin, generic.DetailView):
-#     model = Diary
-#     template_name = 'diary_detail.html'
+class DiaryDetailView(LoginRequiredMixin, generic.DetailView):
+    model = Diary
+    template_name = 'diary_detail.html'
 
 
-# #diary作成
-# class DiaryCreateView(generic.CreateView):
-#     model = Diary
-#     template_name = "diary_create.html"
-#
-#
+#diary作成
+class DiaryCreateView(LoginRequiredMixin, generic.CreateView):
+    model = Diary
+    template_name = "diary_create.html"
+    form_class = DiaryCreateForm
+    success_url = reverse_lazy('precomi:diary')
+
+    def form_valid(self, form):
+        diary = form.save(commit=False)
+        diary.user = self.request.user
+        diary.save()
+        messages.success(self.request, '日記を作成しました。')
+        return super().form_valid(form)
+
+    def form_invalid(self, form):
+        messages.error(self.request, '日記の作成に失敗しました。')
+        return super().form_invalid(form)
+
 # #diaryアップデート
 # class DiaryUpdateView(generic.UpdateView):
 #     model = Diary

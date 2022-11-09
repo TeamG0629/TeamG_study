@@ -14,11 +14,11 @@
         <div class="my-div-style w-100">
             <div class="col-lg-8 col-md-10 mx-auto">
                 <div class="clearfix">
-                    <a class="btn btn-primary float-right" href="#">新規作成</a>
+                    <a class="btn btn-primary float-right" href="{% url 'precomi:diary_create' %}">新規作成</a>
                 </div>
                 {% for diary in diary_list %}
                     <div class="post-preview">
-                        <a href="#">
+                        <a href="{% url 'precomi:diary_detail'precomi.pk %}">
                           <h2 class="post-title">
                             {{ diary.title }}
                           </h2>
@@ -26,7 +26,6 @@
                             {{ diary.content|truncatechars:20 }}
                           </h3>
                         </a>
-                        <p class="post-meta">{{ diary.created_at }}</p>
                     </div>
                     <hr>
                 {% empty %}

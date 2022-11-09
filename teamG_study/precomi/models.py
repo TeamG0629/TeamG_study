@@ -7,7 +7,7 @@ from django.core.validators import MaxValueValidator, MinValueValidator
 #プロフィールモデル
 #(主キー、名前、生年月日、性別、ユーザID、ユーザパスワード、電話番号、妊娠周期、血液型、症状、ユーザタイプ、病院名、画像5枚、最終ログイン)
 class User(models.Model):
-    no = models.CharField(max_length=11,verbose_name='主キー',primary_key=True)
+    no = models.AutoField(verbose_name='主キー',primary_key=True)
     name = models.CharField(max_length=20,verbose_name='名前',null=False)
     datebirth = models.DateTimeField(verbose_name='生年月日',null=True)
     sex = models.CharField(max_length=1,verbose_name='性別',null=False)
@@ -19,11 +19,11 @@ class User(models.Model):
     symptoms = models.CharField(max_length=100,verbose_name='症状',null=True)
     user_type = models.CharField(max_length=1,verbose_name='ユーザタイプ',null=False)
     hospitalname = models.CharField(max_length=50,verbose_name='病院名',null=True)
-    image1 = models.CharField(max_length=256,verbose_name='画像1',null=True)
-    image2 = models.CharField(max_length=256,verbose_name='画像2',null=True)
-    image3 = models.CharField(max_length=256,verbose_name='画像3',null=True)
-    image4 = models.CharField(max_length=256,verbose_name='画像4',null=True)
-    image5 = models.CharField(max_length=256,verbose_name='画像5',null=True)
+    image1 = models.ImageField(verbose_name='画像1',null=True)
+    image2 = models.ImageField(verbose_name='画像2',null=True)
+    image3 = models.ImageField(verbose_name='画像3',null=True)
+    image4 = models.ImageField(verbose_name='画像4',null=True)
+    image5 = models.ImageField(verbose_name='画像5',null=True)
     last_login = models.DateTimeField(max_length=8,verbose_name='最終ログイン',null=False)
 
 
@@ -37,14 +37,15 @@ class User(models.Model):
 
 #日記モデル(画像5枚、タイトル、コメント、日付)
 class Diary(models.Model):
-    tittle = models.CharField(max_length=50,verbose_name='タイトル',null=False)
+    title = models.CharField(max_length=50,verbose_name='タイトル',null=False)
     comment = models.CharField(max_length=100,verbose_name='コメント',null=True)
     date = models.DateField(default=timezone.now,verbose_name='日付')
-    image1 = models.CharField(max_length=256,verbose_name='画像1',null=True)
-    image2 = models.CharField(max_length=256,verbose_name='画像2',null=True)
-    image3 = models.CharField(max_length=256,verbose_name='画像3',null=True)
-    image4 = models.CharField(max_length=256,verbose_name='画像4',null=True)
-    image5 = models.CharField(max_length=256,verbose_name='画像5',null=True)
+    image1 = models.ImageField(verbose_name='画像1',null=True)
+    image2 = models.ImageField(verbose_name='画像2',null=True)
+    image3 = models.ImageField(verbose_name='画像3',null=True)
+    image4 = models.ImageField(verbose_name='画像4',null=True)
+    image5 = models.ImageField(verbose_name='画像5',null=True)
+    created_at = models.DateTimeField(verbose_name='作成日時', auto_now_add=True)
     class Meta:
         db_table = 'diary_info'
 
