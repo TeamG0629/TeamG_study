@@ -78,6 +78,7 @@ header #header_contact {
   color: #fff;
   text-decoration: none;
   transition: background-color 0.2s linear;
+  font-weight: bold;
 }
 #global_navi ul li.current a {
   background-color: #b7a077;
