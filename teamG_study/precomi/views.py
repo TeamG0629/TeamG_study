@@ -46,37 +46,15 @@ class ProfileCreateView(LoginRequiredMixin, generic.CreateView):
         messages.error(self.request, "作成に失敗しました")
         return super().form_invalid(form)
 
-
-
-
-# #プロフィール===============================================
-# #profile.htmlに飛ばす
-# class ProfileView(generic.TemplateView):
-#     template_name = "profile.html"
-#
-#
-# #profile作成
-# class ProfileCreateView(generic.CreateView):
-#     model = User_info
-#     template_name = "profile_create.html"
-#
-#
-# #profileアップデート
-# class ProfileUpdateView(generic.UpdateView):
-#     model = User_info
-#     template_name = "profile_update.html"
-# #======================================================
-#
-#
-# #日記===================================================
 # #diary.htmlに飛ばす
-class DiaryView(generic.TemplateView):
+class DiaryView(LoginRequiredMixin, generic.ListView):
     model = Diary
     template_name = "diary.html"
-#
-#     def get_queryset(self):
-#         diaries = Diary.objects.filter(user=self.request.user).order_by('-created_at')
-#         return diaries
+    paginate_by = 2
+
+    def get_queryset(self):
+        diaries = Diary.objects.filter(user=self.request.user).order_by('-created_at')
+        return diaries
 
 #diary詳細
 class DiaryDetailView(LoginRequiredMixin, generic.DetailView):

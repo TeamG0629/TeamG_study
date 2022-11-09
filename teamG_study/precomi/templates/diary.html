@@ -5,7 +5,7 @@
 {% block active_diary_list %}active{% endblock %}
 
 {% block head %}
-<link href="#" rel="stylesheet">
+<link href="{% static 'css/style.css' %}" rel="stylesheet">
 {% endblock %}
 
 {% block contents %}
@@ -18,14 +18,15 @@
                 </div>
                 {% for diary in diary_list %}
                     <div class="post-preview">
-                        <a href="{% url 'precomi:diary_detail'precomi.pk %}">
+                        <a href="{% url 'precomi:diary_detail' precomi.pk %}">
                           <h2 class="post-title">
                             {{ diary.title }}
                           </h2>
                           <h3 class="post-subtitle">
-                            {{ diary.content|truncatechars:20 }}
+                            {{ diary.comment|truncatechars:20 }}
                           </h3>
                         </a>
+                        <p class="post-meta">{{ diary.created_at }}</p>
                     </div>
                     <hr>
                 {% empty %}

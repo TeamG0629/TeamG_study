@@ -1,5 +1,6 @@
 from django.db import models
 from django.utils import timezone
+from accounts.models import CustomUser
 from django.core.validators import MaxValueValidator, MinValueValidator
 
 
@@ -37,6 +38,7 @@ class User(models.Model):
 
 #日記モデル(画像5枚、タイトル、コメント、日付)
 class Diary(models.Model):
+    # user = models.ForeignKey(CustomUser, verbose_name='ユーザー', on_delete=models.PROTECT)
     title = models.CharField(max_length=50,verbose_name='タイトル',null=False)
     comment = models.CharField(max_length=100,verbose_name='コメント',null=True)
     date = models.DateField(default=timezone.now,verbose_name='日付')
@@ -48,6 +50,9 @@ class Diary(models.Model):
     created_at = models.DateTimeField(verbose_name='作成日時', auto_now_add=True)
     class Meta:
         db_table = 'diary_info'
+
+    def __str__(self):
+        return self.title
 
 #トークチャットモデル(名前、性別、ユーザID、ユーザタイプ、画像1枚)
 class Talkchat(models.Model):
