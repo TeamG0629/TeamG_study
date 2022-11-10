@@ -36,9 +36,10 @@ class User(models.Model):
         return self.user_id
 
 
+# user = models.ForeignKey(CustomUser, verbose_name='ユーザー', on_delete=models.PROTECT)
 #日記モデル(画像5枚、タイトル、コメント、日付)
 class Diary(models.Model):
-    # user = models.ForeignKey(CustomUser, verbose_name='ユーザー', on_delete=models.PROTECT)
+
     title = models.CharField(max_length=50,verbose_name='タイトル',null=False)
     comment = models.CharField(max_length=100,verbose_name='コメント',null=True)
     date = models.DateField(default=timezone.now,verbose_name='日付')
