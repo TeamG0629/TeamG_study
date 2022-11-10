@@ -61,7 +61,6 @@ class DiaryDetailView(LoginRequiredMixin, generic.DetailView):
     model = Diary
     template_name = 'diary_detail.html'
 
-
 #diary作成
 class DiaryCreateView(LoginRequiredMixin, generic.CreateView):
     model = Diary
@@ -122,3 +121,5 @@ class InquiryView(generic.FormView):
         messages.success(self.request, 'メッセージを送信しました。')
         logger.info('Inquiry sent by {}'.format(form.cleaned_data['name']))
         return super().form_valid(form)
+
+
