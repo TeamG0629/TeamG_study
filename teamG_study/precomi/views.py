@@ -1,12 +1,13 @@
 from django.shortcuts import render
 from django.views import generic
-from .forms import UserCreateForm, DiaryCreateForm
+from .forms import UserCreateForm, DiaryCreateForm, InquiryForm
 from  django.contrib.auth.mixins import LoginRequiredMixin,UserPassesTestMixin
 from .models import User, Diary
 from django.contrib import messages
 from django.urls import reverse_lazy
 
-
+import logging
+logger = logging.getLogger(__name__)
 
 #index.htmlに飛ばす
 class IndexView(generic.TemplateView):
@@ -111,4 +112,13 @@ class DiaryDeleteView(generic.DeleteView):
 #   template_name = 'precomi_list.html'
 # #======================================================
 
+class InquiryView(generic.FormView):
+    template_name = "inquiry.html"
+    form_class = InquiryForm
+    success_url = reverse_lazy('diary:inquiry')
 
+    def form_valid(self,form):
+        form.send_email()
+        messages.success(self.request, 'メッセージを送信しました。')
+        logger.info('Inquiry sent by {}'.format(form.cleaned_data['name']))
+        return super().form_valid(form)
