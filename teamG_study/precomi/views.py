@@ -79,7 +79,7 @@ class DiaryCreateView(LoginRequiredMixin, generic.CreateView):
         messages.error(self.request, "日記の作成に失敗しました。")
         return super().form_invalid(form)
 
-#diaryアップデート
+#diary更新
 class DiaryUpdateView(LoginRequiredMixin, generic.UpdateView):
     model = Diary
     template_name = "diary_update.html"
