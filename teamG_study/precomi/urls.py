@@ -15,4 +15,5 @@ urlpatterns = [
     # path('diary-create',views.DiaryCreateView(),name="diary_create"),
     # path('diary-update',views.DiaryUpdateView(),name="diary_update"),
     # path('diary-delete',views.DiaryDeleteView(),name="diary_delete"),
+    path('inquiry/',views.InquiryView.as_view(),name="inquiry"),
 ]
