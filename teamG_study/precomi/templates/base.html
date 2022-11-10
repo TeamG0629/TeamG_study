@@ -9,8 +9,9 @@
 
   <!--ヘッダー-->
   <header>
-    <h1><a href="{% url 'precomi:index' %}"><img src="{% static 'images/プレコミ.png' %}" alt="赤ちゃんの写真" width="300" ></a></h1>
-    <nav id="global_navi">
+    <h1><a href="{% url 'precomi:index' %}"><img src="{% static 'images/プレコミ.png' %}" alt="赤ちゃんの写真" width="200" height="200" ></a></h1>
+    <div id="header_contact"><a href="{% url 'precomi:inquiry' %}"><img src="{% static 'images/email.png' %}" alt="お問い合わせ"></a></div>
+      <nav id="global_navi">
       <ul>
         <li class="current"><a href="{% url 'precomi:profile' %}">プロフィール</a></li>
         <li><a href="{% url 'precomi:diary' %}">日記</a></li>
