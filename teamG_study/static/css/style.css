@@ -38,12 +38,15 @@ img {vertical-align: bottom;}
   padding: 4px 9px 4px 14px;
 }
 header {
-  width: 980px;
+  width: 1000px;
   margin: 0 auto;
+  border-radius: 10px;
 }
 header h1 {
   float: left;
   margin: 35px 0 0;
+  display: flex;
+  justify-content: space-between;
 }
 header #header_contact {
   float: right;
@@ -71,18 +74,21 @@ header #header_contact {
   float: left;
   margin-right: 1px;
   text-align: center;
+
 }
 #global_navi ul li a {
   display: block;
   padding: 16px;
   background-color: #352b23;
-  color: #fff;
+  color: white;
   text-decoration: none;
   transition: background-color 0.2s linear;
+  font-weight: bold;
 }
 #global_navi ul li.current a {
-  background-color: #b7a077;
+  /*background-color: #b7a077;*/
 }
+/*マウスを乗せた時の色*/
 #global_navi ul li a:hover {
   background-color: #8c7a5b;
 }
@@ -155,11 +161,7 @@ header #header_contact {
 }
 footer {
   background-color: #352b23;
-  position: absolute;/*←絶対位置*/
-  bottom: 0; /*下に固定*/
   text-align: center;
-  width: 100%;
-  color: #fff;
 }
 footer #footer_nav {
   background-color: #efefef;
@@ -319,10 +321,9 @@ footer small {
   background-color: #c7ae81;
 }
 
-
 /* 丸赤ちゃんの写真 */
 #circle {
-  width: 60%;
+  width: 50%;
   border-radius: 50%;
   position: relative;
   overflow: hidden;
@@ -340,7 +341,7 @@ footer small {
   height: 100%;
   object-fit: cover;
 }
-/*写真を真ん中に配置 */
+/*写真を真ん中に配置  */
 #circle{
     display: block;
     margin-left: auto;
@@ -374,4 +375,3 @@ footer small {
     width: 100%;
     height: 100%;
 }
-
