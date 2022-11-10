@@ -1,13 +1,12 @@
 from django.shortcuts import render
 from django.views import generic
-from .forms import UserCreateForm
+from .forms import UserCreateForm, DiaryCreateForm
 from  django.contrib.auth.mixins import LoginRequiredMixin,UserPassesTestMixin
-from .models import User
+from .models import User, Diary
 from django.contrib import messages
 from django.urls import reverse_lazy
 
-from .forms import DiaryCreateForm
-from .models import Diary
+
 
 #index.htmlに飛ばす
 class IndexView(generic.TemplateView):
@@ -53,7 +52,7 @@ class DiaryView(LoginRequiredMixin, generic.ListView):
     paginate_by = 2
 
     def get_queryset(self):
-        diaries = Diary.objects.all()
+        diaries = Diary.objects.filter(user=self.request.user).order_by('-created_at')
         return diaries
 
 #diary詳細
@@ -77,19 +76,35 @@ class DiaryCreateView(LoginRequiredMixin, generic.CreateView):
         return super().form_valid(form)
 
     def form_invalid(self, form):
-        messages.error(self.request, '日記の作成に失敗しました。')
+        messages.error(self.request, "日記の作成に失敗しました。")
         return super().form_invalid(form)
 
-# #diaryアップデート
-# class DiaryUpdateView(generic.UpdateView):
-#     model = Diary
-#     template_name = "diary_update.html"
-#
-#
+#diaryアップデート
+class DiaryUpdateView(LoginRequiredMixin, generic.UpdateView):
+    model = Diary
+    template_name = "diary_update.html"
+    form_class = DiaryCreateForm
+
+    def get_success_url(self):
+        return reverse_lazy('precomi:diary_detail', kwargs={'pk': self.kwargs['pk']})
+
+    def form_valid(self, form):
+        messages.success(self.request, '日記を更新しました。')
+        return super().form_valid(form)
+
+    def form_invalid(self, form):
+        messages.error(self.request, "日記の更新に失敗しました。")
+        return super().form_invalid(form)
+
 # #diary削除
-# class DiaryDeleteView(generic.DeleteView):
-#     model = Diary
-#     template_name = "diary_delete.html"
+class DiaryDeleteView(generic.DeleteView):
+    model = Diary
+    template_name = "diary_delete.html"
+    success_url = reverse_lazy('precomi:diary')
+
+    def delete(self, request, *args, **kwargs):
+        messages.success(self.request, "日記を削除しました。")
+        return super().delete(request, *args, **kwargs)
 
 #class PrecomiListView(LoginRequiredMixin, generic.ListView):
 #    model = Precomi

@@ -36,18 +36,18 @@ class User(models.Model):
         return self.user_id
 
 
-# user = models.ForeignKey(CustomUser, verbose_name='ユーザー', on_delete=models.PROTECT)
+
 #日記モデル(画像5枚、タイトル、コメント、日付)
 class Diary(models.Model):
-
+    user = models.ForeignKey(CustomUser, verbose_name='ユーザー', on_delete=models.PROTECT)
     title = models.CharField(max_length=50,verbose_name='タイトル',null=False)
     comment = models.CharField(max_length=100,verbose_name='コメント',null=True)
     date = models.DateField(default=timezone.now,verbose_name='日付')
-    image1 = models.ImageField(verbose_name='画像1',null=True)
-    image2 = models.ImageField(verbose_name='画像2',null=True)
-    image3 = models.ImageField(verbose_name='画像3',null=True)
-    image4 = models.ImageField(verbose_name='画像4',null=True)
-    image5 = models.ImageField(verbose_name='画像5',null=True)
+    image1 = models.ImageField(verbose_name='画像1', blank=True, null=True)
+    image2 = models.ImageField(verbose_name='画像2', blank=True, null=True)
+    image3 = models.ImageField(verbose_name='画像3', blank=True, null=True)
+    image4 = models.ImageField(verbose_name='画像4', blank=True, null=True)
+    image5 = models.ImageField(verbose_name='画像5', blank=True, null=True)
     created_at = models.DateTimeField(verbose_name='作成日時', auto_now_add=True)
     class Meta:
         db_table = 'diary_info'
