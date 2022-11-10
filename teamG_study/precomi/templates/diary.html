@@ -25,6 +25,9 @@
                           <h3 class="post-subtitle">
                             {{ diary.comment|truncatechars:20 }}
                           </h3>
+                            {% if diary.image1 %}
+                                <img src="{{ diary.image1.url }}" style="width:10%;height:auto;">
+                            {% endif %}
                         </a>
                         <p class="post-meta">{{ diary.created_at }}</p>
                     </div>

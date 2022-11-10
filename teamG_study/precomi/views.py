@@ -17,34 +17,10 @@ class IndexView(generic.TemplateView):
 class TalkView(generic.TemplateView):
     template_name = "talk.html"
 
-#profile.htmlに飛ばす
-class ProfileView(generic.TemplateView):
-    template_name = "profile.html"
-
-#profile_update.htmlに飛ばす
-class ProfileUpdateView(generic.TemplateView):
-    template_name = "profile_update.html"
-
 #緊急通知の画面に飛ばす
 class NoticeView(generic.TemplateView):
     template_name = "notice.html"
 
-#profile_create.htmlに飛ばす(新規作成)
-class ProfileCreateView(LoginRequiredMixin, generic.CreateView):
-    model = User
-    template_name = 'profile_create.html'
-    form_class = UserCreateForm
-
-    def form_valid(self, form):
-        user = form.save(commit=False)
-        user.user = self.request.user
-        user.save()
-        messages.success(self.request, '作成しました')
-        return super().form_valid(form)
-
-    def form_invalid(self, form):
-        messages.error(self.request, "作成に失敗しました")
-        return super().form_invalid(form)
 
 # #diary.htmlに飛ばす
 class DiaryView(LoginRequiredMixin, generic.ListView):
@@ -106,9 +82,7 @@ class DiaryDeleteView(generic.DeleteView):
         messages.success(self.request, "日記を削除しました。")
         return super().delete(request, *args, **kwargs)
 
-#class PrecomiListView(LoginRequiredMixin, generic.ListView):
-#    model = Precomi
-#   template_name = 'precomi_list.html'
+
 # #======================================================
 
 class InquiryView(generic.FormView):
@@ -122,4 +96,46 @@ class InquiryView(generic.FormView):
         logger.info('Inquiry sent by {}'.format(form.cleaned_data['name']))
         return super().form_valid(form)
 
+#profile.htmlに飛ばす
+class ProfileView(LoginRequiredMixin, generic.ListView):
+    model = User
+    template_name = "profile.html"
+
+    def get_queryset(self):
+        profile = User.objects.all()
+        return profile
+#profile_update.htmlに飛ばす
+class ProfileUpdateView(LoginRequiredMixin, generic.UpdateView):
+    model = User
+    template_name = "profile_update.html"
+    form_class = UserCreateForm
+
+    def get_success_url(self):
+        return reverse_lazy('precomi:profile', kwargs={'pk': self.kwargs['pk']})
+
+    def form_valid(self, form):
+        messages.success(self.request, 'プロフィールを更新しました。')
+        return super().form_valid(form)
+
+    def form_invalid(self, form):
+        messages.error(self.request, "プロフィールの更新に失敗しました。")
+        return super().form_invalid(form)
+
+
+class ProfileCreateView(LoginRequiredMixin, generic.CreateView):
+    model = User
+    template_name = 'profile_create.html'
+    form_class = UserCreateForm
+    success_url = reverse_lazy('precomi:profile')
+
+    def form_valid(self, form):
+        user = form.save(commit=False)
+        user.user = self.request.user
+        user.save()
+        messages.success(self.request, '作成しました')
+        return super().form_valid(form)
+
+    def form_invalid(self, form):
+        messages.error(self.request, "作成に失敗しました")
+        return super().form_invalid(form)
 

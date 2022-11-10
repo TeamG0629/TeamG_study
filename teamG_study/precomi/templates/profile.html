@@ -1,69 +1,42 @@
 {% extends 'base.html' %}
 {% load static %}
-<html lang="ja">
-<head>
-    <meta charset="UTF-8">
-    <title>プロフィール</title>
-    <meta name="description" content="プロフィール">
-    <script>
-		window.addEventListener('load', function(){
+{% block contents %}
 
-			window.addEventListener('online', function(){
-				checkOnline();
-			});
+{% for diary in diary_list %}
+<div>
+    <button type="button"><a href="{% url 'precomi:profile_update' diary.pk %}">編集</a></button>
+</div>
+{% endfor %}
+<div>
+    <button type="button"><a href="{% url 'precomi:profile_create' %}">新規</a></button>
+</div>
 
-			window.addEventListener('offline', function(){
-				checkOnline();
-			});
+    {% for i in user_list %}
+            {% if i.image1 %}
+                <img src="{{ i.image1.url }}"></img>
+            {% else %}
+            {% endif %}
+            <h2>
+                名前:{{ i.name }}</h2>
+            <h2>
+                性別:{{i.sex}}</h2>
+            <h2>
+                生年月日:{{i.datebirth}}
+            </h2>
+            <h2>
+                血液型:{{i.bloodtype}}
+            </h2>
+            <h2>
+                月経周期:{{i.precycle}}
+            </h2>
+            <h2>
+                電話番号:{{i.telnum}}
+            </h2>
+            <h2>
+                症状:{{i.symptoms}}
+            </h2>
+    {% empty %}
+        <p>プロフィールがありません。</p>
+    {% endfor %}
 
-		});
-
-		function checkOnline() {
-			if( navigator.onLine ) {
-				console.log("オンライン中");
-			} else {
-				console.log("オフラインになりました");
-			}
-		}
-	</script>
-</head>
-{% block contents%}
-<body>
-    <div>
-        <button type="button"><a href="#">編集</a></button>
-    </div>
-    <div>
-        <form action="test.html" method="post" enctype="multipart/form-data" >
-    <div>
-        <input type="file" name="test" multiple/>
-    </div>
-        </form>
-    </div>
-    <div class="profile-card">
-      <div class="profile-card__inner">
-      <div class="profile-thumb">
-        <img src="https://obl-life.com/wordpress/wp-content/uploads/2019/06/obl_icon-red.jpg" alt="アイコン">
-      </div>
-      <div class="profile-content">
-            <span class="profile-name">おぶり</span>
-        <span class="profile-job">デザイナー・フロントエンジニア</span>
-        <span class="profile-intro">福岡在住のフリーランスデザイナーです。アウトドアからインドアな趣味を楽しく・簡単・便利をモットーに雑記ブログを書いています。</span>
-      </div>
-        </div>
-    </div>
-
-    <p>
-        週　日　妊娠　か月
-        名前：
-        出産予定日
-        ・生年月日：
-        ・年齢：
-        ・月経周期：
-        ・出産予定日：
-        ・血液型：
-        ・緊急連絡先：
-        コメント欄
-    </p>
-</body>
-</html>
 {% endblock %}

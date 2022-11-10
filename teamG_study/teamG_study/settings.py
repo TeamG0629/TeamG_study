@@ -207,7 +207,7 @@ ACCOUNT_LOGOUT_ON_GET = True
 
 ACCOUNT_EMAIL_SUBJECT_PREFIX = ''
 
-DEFAULT_FROM_EMAIL = 'teamgtnkma@outlook.jp'
+DEFAULT_FROM_EMAIL = 'ykh2135128@stu.o-hara.ac.jp'
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
