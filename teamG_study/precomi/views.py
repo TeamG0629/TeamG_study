@@ -15,8 +15,9 @@ class TalkView(generic.TemplateView):
     template_name = "talk.html"
 
 #profile.htmlに飛ばす
-class ProfileView(generic.ListView):
-    template_name = "profile.html"
+class ProfileView(LoginRequiredMixin, generic.ListView):
+    model = User
+    template_name = 'profile.html'
     def get_queryset(self):
         precomi = User.objects.all()
         return precomi
@@ -24,11 +25,8 @@ class ProfileView(generic.ListView):
 #profile_update.htmlに飛ばす
 class ProfileUpdateView(LoginRequiredMixin,generic.UpdateView):
     model = User
-    template_name = "profile_update.html"
+    template_name = 'profile_update.html'
     form_class = UserCreateForm
-    def get_queryset(self):
-        return reverse_lazy('precomi:profile', kwargs={'pk': self.kwargs['pk']})
-
     def form_valid(self, form):
         messages.success(self.request,'更新しました')
         return super().form_valid(form)

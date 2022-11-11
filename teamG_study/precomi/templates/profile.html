@@ -2,7 +2,7 @@
 {% load static %}
 {% block contents%}
     <div>
-        <button type="button"><a href="{% url 'precomi:profile_update' object.pk %}">編集</a></button>
+        <button type="button"><a href="{% url 'precomi:profile_update' %}">編集</a></button>
     </div>
     <div>
         <button type="button"><a href="{% url 'precomi:profile_create' %}">新規</a></button>
@@ -15,7 +15,7 @@
     {% endif %}
         {% for i in user_list %}
                 {% if i.image1 %}
-                    <img src="{{ i.image1.url }}" />
+                    <img src="{{i.image1.url}}" width=15% height=auto></img>
                 {% else %}
                     <p>失敗</p>
                 {% endif %}
