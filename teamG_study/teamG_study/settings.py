@@ -185,8 +185,8 @@ MESSAGE_TAGS = {
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_USE_TLS = True
 EMAIL_HOST = 'smtp-mail.outlook.com'
-EMAIL_HOST_USER = 'ykh2135128@stu.o-hara.ac.jp'
-EMAIL_HOST_PASSWORD = '0981130852aN'
+EMAIL_HOST_USER = 'teamgtnkma@outlook.jp'
+EMAIL_HOST_PASSWORD = 'Team_G_tnkma'
 EMAIL_PORT =587
 
 
