@@ -45,9 +45,9 @@ class InquiryForm(forms.Form):
 
         subject = 'お問い合わせ {}'.format(title)
         message = '送信者名: {0}\nメールアドレス: {1}\nメッセージ:\n{2}'.format(name, email, message)
-        from_email = 'teamgtnkma@outlook.jp'
+        from_email = 'ykh2135128@stu.o-hara.ac.jp'
         to_list = [
-            'teamgtnkma@outlook.jp'
+            'ykh2135128@stu.o-hara.ac.jp'
         ]
         cc_list = [
             email
