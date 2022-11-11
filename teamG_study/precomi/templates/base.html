@@ -1,16 +1,30 @@
 {% load static %}
-<html lang="ja">
+<html lang="ja" xmlns="http://www.w3.org/1999/html">
 <head>
 <meta charset="UTF-8">
 <title>プレコミ</title>
-<link rel="stylesheet" href="{% static 'css/style.css' %}">
+<link rel="stylesheet" href="{% static 'css/style3.css' %}">
 </head>
 <body>
 
   <!--ヘッダー-->
   <header>
-    <h1><a href="{% url 'precomi:index' %}"><img src="{% static 'images/プレコミ.png' %}" alt="赤ちゃんの写真" width="200" height="200" ></a></h1>
-    <div id="header_contact"><a href="{% url 'precomi:inquiry' %}"><img src="{% static 'images/email.png' %}" alt="お問い合わせ"></a></div>
+    <h1>
+
+        <a href="{% url 'precomi:index' %}"><img id="rogo"src="{% static 'images/プレコミ.png' %}" alt="ロゴ" width="200" height="200"  ></a>
+
+    </h1>
+<!--    <h2>-->
+<!--        <p class="rogo2">-->
+<!--        <a href="{% url 'precomi:inquiry' %}"><img src="{% static 'images/email.png' %}" alt="お問い合わせ"></a></div>-->
+<!--        </p>-->
+<!--    </h2>-->
+<!--      <h3>-->
+<!--          <p class="rogo3">-->
+<!--          <div id="phone_button"><a href="contact.html"><img src="{% static 'images/phone.png' %}" alt="お問い合わせ"></a></div>-->
+<!--          </p>-->
+<!--      </h3>-->
+      <div id="header_contact">
       <nav id="global_navi">
       <ul>
         <li class="current"><a href="{% url 'precomi:profile' %}">プロフィール</a></li>
@@ -24,7 +38,7 @@
         {% endif %}
       </ul>
     </nav>
-    <div id="phone_button"><a href="contact.html"><img src="{% static 'images/phone.png' %}" alt="お問い合わせ"></a></div>
+
   </header>
   <!--/ヘッダー-->
   <!--コンテント-->
