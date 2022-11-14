@@ -182,12 +182,7 @@ MESSAGE_TAGS = {
     messages.INFO: 'alert alert-info',
 }
 #取り合わせのemail address 設定
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_USE_TLS = True
-EMAIL_HOST = 'smtp-mail.outlook.com'
-EMAIL_HOST_USER = 'ykh2135128@stu.o-hara.ac.jp'
-EMAIL_HOST_PASSWORD = '0981130852aN'
-EMAIL_PORT =587
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 
 AUTHENTICATION_BACKENDS = (
@@ -207,7 +202,7 @@ ACCOUNT_LOGOUT_ON_GET = True
 
 ACCOUNT_EMAIL_SUBJECT_PREFIX = ''
 
-DEFAULT_FROM_EMAIL = 'ykh2135128@stu.o-hara.ac.jp'
+DEFAULT_FROM_EMAIL = os.environ.get('FROM_EMAIL')
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 

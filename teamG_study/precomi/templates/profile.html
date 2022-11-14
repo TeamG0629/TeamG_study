@@ -2,14 +2,20 @@
 {% load static %}
 {% block contents %}
 
-{% for diary in diary_list %}
+
+{% for i in user_list %}
 <div>
-    <button type="button"><a href="{% url 'precomi:profile_update' diary.pk %}">編集</a></button>
+    <button type="button"><a href="{% url 'precomi:profile_update' i.pk %}">編集</a></button>
 </div>
 {% endfor %}
+
+{% if user_list >= 1 %}
+{% else %}
 <div>
     <button type="button"><a href="{% url 'precomi:profile_create' %}">新規</a></button>
 </div>
+{% endif %}
+
 
     {% for i in user_list %}
             {% if i.image1 %}
