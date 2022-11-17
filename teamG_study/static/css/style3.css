@@ -24,7 +24,8 @@ img {vertical-align: bottom;}
 
 header {
     width: 100%; /* 幅いっぱいを指定 */
-    height: 200px; /* 高さを50pxに指定 */
+    height: 130px; /* 高さを50pxに指定 */
+    background: pink; /* 背景色にグレーを指定 */
     padding: 20px 50px; /* ヘッダーに上下左右それぞれ余白を指定 */
     box-sizing: border-box; /* padding分を含んで幅を100%にするため */
     position: fixed; /* ウィンドウを基準に画面に固定 */
@@ -38,20 +39,14 @@ header .gnav .menu {
     display: flex; /* 中の要素を横並びにする */
 }
 
-header .gnav .menu li {
-    list-style: none; /* リストの[・]を消す */
-}
 
 header .gnav .menu li + li {
     margin-left: 40px; /* メニューそれぞれに間隔をあけるため */
 }
 
-main {
-    height: 100vw; /* スクロールの演出を見れるようにmainに高さを指定 */
-}
-
 #rogo {
 	border-radius: 100px;
+	color: pink;
 }
 /*header {
   width: 980px;
@@ -188,9 +183,11 @@ header #header_contact {
 footer {
   background-color: #352b23;
   text-align: center;
+  position: absolute;
+  bottom: 0;
+  width:100%;
 }
 footer #footer_nav {
-  background-color: #efefef;
   padding: 10px 0;
 }
 footer #footer_nav ul {
@@ -351,8 +348,6 @@ footer small {
 #circle {
   width: 50%;
   border-radius: 50%;
-  position: relative;
-  overflow: hidden;
 }
 #circle::before{
   content: "";
@@ -385,3 +380,10 @@ footer small {
     position: relative;
 }*/
 
+
+.container {
+      position: relative;
+      padding-bottom: 60px;
+      box-sizing: border-box;
+      min-height: 100vh;
+}

@@ -27,7 +27,6 @@ class User(models.Model):
     image5 = models.ImageField(verbose_name='画像5',null=True)
     last_login = models.DateTimeField(max_length=8,verbose_name='最終ログイン',auto_now=True)
 
-
     class Meta:
         db_table = 'User_info'
 

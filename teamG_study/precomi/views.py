@@ -6,6 +6,7 @@ from .models import User, Diary
 from django.contrib import messages
 from django.urls import reverse_lazy
 
+
 import logging
 logger = logging.getLogger(__name__)
 
@@ -96,6 +97,7 @@ class InquiryView(generic.FormView):
         logger.info('Inquiry sent by {}'.format(form.cleaned_data['name']))
         return super().form_valid(form)
 
+
 #profile.htmlに飛ばす
 class ProfileView(LoginRequiredMixin, generic.ListView):
     model = User
@@ -104,22 +106,6 @@ class ProfileView(LoginRequiredMixin, generic.ListView):
     def get_queryset(self):
         profile = User.objects.all()
         return profile
-#profile_update.htmlに飛ばす
-class ProfileUpdateView(LoginRequiredMixin, generic.UpdateView):
-    model = User
-    template_name = "profile_update.html"
-    form_class = UserCreateForm
-
-    def get_success_url(self):
-        return reverse_lazy('precomi:profile', kwargs={'pk': self.kwargs['pk']})
-
-    def form_valid(self, form):
-        messages.success(self.request, 'プロフィールを更新しました。')
-        return super().form_valid(form)
-
-    def form_invalid(self, form):
-        messages.error(self.request, "プロフィールの更新に失敗しました。")
-        return super().form_invalid(form)
 
 
 class ProfileCreateView(LoginRequiredMixin, generic.CreateView):
@@ -138,4 +124,22 @@ class ProfileCreateView(LoginRequiredMixin, generic.CreateView):
     def form_invalid(self, form):
         messages.error(self.request, "作成に失敗しました")
         return super().form_invalid(form)
+
+#profile_update.htmlに飛ばす
+class ProfileUpdateView(LoginRequiredMixin, generic.UpdateView):
+    model = User
+    template_name = "profile_update.html"
+    form_class = UserCreateForm
+
+    def get_success_url(self):
+        return reverse_lazy('precomi:profile')
+
+    def form_valid(self, form):
+        messages.success(self.request, 'プロフィールを更新しました。')
+        return super().form_valid(form)
+
+    def form_invalid(self, form):
+        messages.error(self.request, "プロフィールの更新に失敗しました。")
+        return super().form_invalid(form)
+
 

@@ -2,45 +2,40 @@
 {% load static %}
 {% block contents %}
 
-
-{% for i in user_list %}
-<div>
-    <button type="button"><a href="{% url 'precomi:profile_update' i.pk %}">編集</a></button>
-</div>
-{% endfor %}
-
-{% if user_list >= 1 %}
-{% else %}
-<div>
-    <button type="button"><a href="{% url 'precomi:profile_create' %}">新規</a></button>
-</div>
-{% endif %}
-
+    {% if not user_list %}
+        <div>
+            <button type="button"><a href="{% url 'precomi:profile_create' %}">新規</a></button>
+        </div>
+    {% endif %}
 
     {% for i in user_list %}
-            {% if i.image1 %}
-                <img src="{{ i.image1.url }}"></img>
-            {% else %}
-            {% endif %}
-            <h2>
-                名前:{{ i.name }}</h2>
-            <h2>
-                性別:{{i.sex}}</h2>
-            <h2>
-                生年月日:{{i.datebirth}}
-            </h2>
-            <h2>
-                血液型:{{i.bloodtype}}
-            </h2>
-            <h2>
-                月経周期:{{i.precycle}}
-            </h2>
-            <h2>
-                電話番号:{{i.telnum}}
-            </h2>
-            <h2>
-                症状:{{i.symptoms}}
-            </h2>
+    <div>
+        <button type="button"><a href="{% url 'precomi:profile_update' i.pk %}">編集</a></button>
+    </div>
+
+        {% if i.image1 %}
+            <img src="{{ i.image1.url }}"></img>
+        {% else %}
+        {% endif %}
+        <h2>
+            名前:{{ i.name }}</h2>
+        <h2>
+            性別:{{i.sex}}</h2>
+        <h2>
+            生年月日:{{i.datebirth}}
+        </h2>
+        <h2>
+            血液型:{{i.bloodtype}}
+        </h2>
+        <h2>
+            月経周期:{{i.precycle}}
+        </h2>
+        <h2>
+            電話番号:{{i.telnum}}
+        </h2>
+        <h2>
+            症状:{{i.symptoms}}
+        </h2>
     {% empty %}
         <p>プロフィールがありません。</p>
     {% endfor %}

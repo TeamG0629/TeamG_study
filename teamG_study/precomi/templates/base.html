@@ -3,26 +3,32 @@
 <head>
 <meta charset="UTF-8">
 <title>プレコミ</title>
-<link rel="stylesheet" href="#">
+<!-- アイコンの設定   -->
+<link rel="icon" type="image/x-icon" href="{% static 'assets/favicon.ico' %}"/>
+<!--bootstrapの設定    -->
+<link href="{% static 'css/style3.css' %}" rel="stylesheet" />
+<!--my styleの設定    -->
+<link rel="stylesheet" type="text/css" href="{% static 'css/mystyle.css' %}">
+{% block head %}{% endblock %}
 </head>
 <body>
-
+<div class="container">
   <!--ヘッダー-->
   <header>
     <h1>
-
-        <a href="{% url 'precomi:index' %}"><img id="rogo"src="{% static 'images/プレコミ.png' %}" alt="ロゴ" width="200" height="200"  ></a>
-
+        <a href="{% url 'precomi:index' %}"><img id="rogo" src="{% static 'images/プレコミ.png' %}" alt="ロゴ" width="200" height="200"  ></a>
     </h1>
 <!--    <h2>-->
 <!--        <p class="rogo2">-->
-<!--        <a href="{% url 'precomi:inquiry' %}"><img src="{% static 'images/email.png' %}" alt="お問い合わせ"></a></div>-->
+<!--        <a href="{% url 'precomi:inquiry' %}"><img src="{% static 'images/email.png' %}" alt="お問い合わせ"></a>-->
 <!--        </p>-->
 <!--    </h2>-->
 <!--      <h3>-->
 <!--          <p class="rogo3">-->
-<!--          <div id="phone_button"><a href="contact.html"><img src="{% static 'images/phone.png' %}" alt="お問い合わせ"></a></div>-->
-<!--          </p>-->
+<!--          <div id="phone_button">-->
+<!--          <a href="contact.html">-->
+<!--              <img src="{% static 'images/phone.png' %}" alt="お問い合わせ">-->
+<!--          </a></div>-->
 <!--      </h3>-->
       <div id="header_contact">
       <nav id="global_navi">
@@ -30,6 +36,7 @@
         <li class="current"><a href="{% url 'precomi:profile' %}">プロフィール</a></li>
         <li><a href="{% url 'precomi:diary' %}">日記</a></li>
         <li><a href="{% url 'precomi:talk' %}">コミュニティ</a></li>
+          <li><a href="{% url 'precomi:inquiry' %}">お問い合わせ</a></li>
         {% if user.is_authenticated %}
         <li><a href="{% url 'account_logout' %}">ログアウト</a></li>
         {% else %}
@@ -38,6 +45,7 @@
         {% endif %}
       </ul>
     </nav>
+      </div>
 
   </header>
   <!--/ヘッダー-->
@@ -64,19 +72,15 @@
     <div id="footer_nav">
       <ul>
         <li><a href="{% url 'precomi:profile' %}">プロフィール</a></li>
-        <li><a href="#">日記</a></li>
+        <li><a href="{% url 'precomi:diary' %}">日記</a></li>
         <li><a href="{% url 'precomi:talk' %}">コミュニティ</a></li>
-        {% if user.is_authenticated %}
-        <li><a href="{% url 'account_logout' %}">ログアウト</a></li>
-        {% else %}
-          <li><a href="{% url 'account_login' %}">ログイン</a></li>
-          <li><a href="{% url 'account_signup' %}">サインアップ</a></li>
-        {% endif %}
+        <li><a href="{% url 'account_login' %}">ログイン</a></li>
+        <li><a href="{% url 'account_signup' %}">サインアップ</a></li>
       </ul>
     </div>
     <small>プレコミ</small>
   </footer>
   <!--/フッター-->
-
+</div>
 </body>
 </html>
