@@ -1,71 +1,62 @@
 {% load static %}
 <html lang="ja" xmlns="http://www.w3.org/1999/html">
 <head>
-<meta charset="UTF-8">
-<title>プレコミ</title>
-<!-- アイコンの設定   -->
-<link rel="icon" type="image/x-icon" href="{% static 'assets/favicon.ico' %}"/>
-<!--bootstrapの設定    -->
-<link href="{% static 'css/style3.css' %}" rel="stylesheet" />
-<!--my styleの設定    -->
-<link rel="stylesheet" type="text/css" href="{% static 'css/mystyle.css' %}">
-{% block head %}{% endblock %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title></title>
+    <title>{% block title %}{% endblock %}</title>
+    <!-- Bootstrap Icons-->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
+    <!-- SimpleLightbox plugin CSS-->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/SimpleLightbox/2.1.0/simpleLightbox.min.css" rel="stylesheet" />
+    <!--bootstrapの設定    -->
+    <link href="{% static 'vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+    <!-- Custom fonts for this template -->
+    <link href="https://fonts.googleapis.com/css?family=Catamaran:100,200,300,400,500,600,700,800,900" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Lato:100,100i,300,300i,400,400i,700,700i,900,900i" rel="stylesheet">
+    <!-- Custom styles for this template -->
+    <link href="#" rel="stylesheet">
+    {% block head %}{% endblock %}
 </head>
-<body>
-<div class="container">
-  <!--ヘッダー-->
+<body id="page-top">
   <header>
-    <h1>
-        <a href="{% url 'precomi:index' %}"><img id="rogo" src="{% static 'images/プレコミ.png' %}" alt="ロゴ" width="200" height="200"  ></a>
-    </h1>
-<!--    <h2>-->
-<!--        <p class="rogo2">-->
-<!--        <a href="{% url 'precomi:inquiry' %}"><img src="{% static 'images/email.png' %}" alt="お問い合わせ"></a>-->
-<!--        </p>-->
-<!--    </h2>-->
-<!--      <h3>-->
-<!--          <p class="rogo3">-->
-<!--          <div id="phone_button">-->
-<!--          <a href="contact.html">-->
-<!--              <img src="{% static 'images/phone.png' %}" alt="お問い合わせ">-->
-<!--          </a></div>-->
-<!--      </h3>-->
-      <div id="header_contact">
-      <nav id="global_navi">
-      <ul>
-        <li class="current"><a href="{% url 'precomi:profile' %}">プロフィール</a></li>
-        <li><a href="{% url 'precomi:diary' %}">日記</a></li>
-        <li><a href="{% url 'precomi:talk' %}">コミュニティ</a></li>
-          <li><a href="{% url 'precomi:inquiry' %}">お問い合わせ</a></li>
-        {% if user.is_authenticated %}
-        <li><a href="{% url 'account_logout' %}">ログアウト</a></li>
-        {% else %}
-          <li><a href="{% url 'account_login' %}">ログイン</a></li>
-          <li><a href="{% url 'account_signup' %}">サインアップ</a></li>
-        {% endif %}
-      </ul>
-    </nav>
-      </div>
-
+      <nav class="navbar navbar-expand-lg bg-secondary text-uppercase fixed-top" id="mainNav">
+            <div class="container">
+                <a class="navbar-brand" href="{% url 'precomi:index' %}"><img id="rogo" src="{% static 'images/プレコミ.png' %}" alt="ロゴ" width="100" height="100"  ></a>
+                <div class="collapse navbar-collapse" id="navbarResponsive">
+                    <ul class="navbar-nav ms-auto">
+                        <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded" href="{% url 'precomi:profile' %}">プロフィール</a></li>
+                        <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded" href="{% url 'precomi:diary' %}">日記</a></li>
+                        <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded" href="{% url 'precomi:talk' %}">コミュニティ</a></li>
+                        {% if user.is_authenticated %}
+                        <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded" href="{% url 'account_logout' %}">ログアウト</a></li>
+                        {% else %}
+                        <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded" href="{% url 'account_login' %}">ログイン</a></li>
+                        <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded" href="{% url 'account_signup' %}">サインアップ</a></li>
+                        {% endif %}
+                    </ul>
+                </div>
+            </div>
+      </nav>
   </header>
-  <!--/ヘッダー-->
-  <!--コンテント-->
   {% if messages %}
-          <div class="container">
-              <div class="row">
-                  <div class="my-div-style w-100">
-                      <ul class="messages" style="list-style: none;">
-                          {% for message in messages %}
-                          <li {% if message.tags %} class="{{ message.tags }}" {% endif %}>
-                              {{ message }}
-                          </li>
-                          {% endfor %}
-                      </ul>
-                  </div>
+      <div class="container">
+          <div class="row">
+              <div class="my-div-style w-100">
+                  <ul class="messages" style="list-style: none;">
+                      {% for message in messages %}
+                      <li {% if message.tags %} class="{{ message.tags }}" {% endif %}>
+                          {{ message }}
+                      </li>
+                      {% endfor %}
+                  </ul>
               </div>
           </div>
-        {% endif %}
-   {% block contents%}{% endblock %}
+      </div>
+  {% endif %}
+  {% block contents%}{% endblock %}
   <!--/コンテント-->
   <!--フッター-->
   <footer>
@@ -78,9 +69,43 @@
         <li><a href="{% url 'account_signup' %}">サインアップ</a></li>
       </ul>
     </div>
-    <small>プレコミ</small>
   </footer>
-  <!--/フッター-->
+
+
+<!--  <footer class="footer text-center">-->
+<!--    <div class="container">-->
+<!--        <div class="row">-->
+<!--            &lt;!&ndash; Footer Location&ndash;&gt;-->
+<!--            <div class="col-lg-4 mb-5 mb-lg-0">-->
+<!--                <h4 class="text-uppercase mb-4">Location</h4>-->
+<!--                <p class="lead mb-0">-->
+<!--                    2215 John Daniel Drive-->
+<!--                    <br />-->
+<!--                    Clark, MO 65243-->
+<!--                </p>-->
+<!--            </div>-->
+<!--            &lt;!&ndash; Footer Social Icons&ndash;&gt;-->
+<!--            <div class="col-lg-4 mb-5 mb-lg-0">-->
+<!--                <h4 class="text-uppercase mb-4">Around the Web</h4>-->
+<!--                <a class="btn btn-outline-light btn-social mx-1" href="#!"><i class="fab fa-fw fa-facebook-f"></i></a>-->
+<!--            </div>-->
+<!--            &lt;!&ndash; Footer About Text&ndash;&gt;-->
+<!--            <div class="col-lg-4">-->
+<!--                <h4 class="text-uppercase mb-4">About Freelancer</h4>-->
+<!--                <p class="lead mb-0">-->
+<!--                    Freelance is a free to use, MIT licensed Bootstrap theme created by-->
+<!--                    <a href="http://startbootstrap.com">Start Bootstrap</a>-->
+<!--                    .-->
+<!--                </p>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--  </footer>-->
+            <!-- Copyright Section-->
+        <div class="copyright py-4 text-center text-white">
+            <div class="container"><small> &copy; プレコミ</small></div>
+        </div>
+
 </div>
 </body>
 </html>

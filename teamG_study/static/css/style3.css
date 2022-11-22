@@ -23,9 +23,11 @@ p {
 img {vertical-align: bottom;}
 
 header {
+
     width: 100%; /* 幅いっぱいを指定 */
+    box-sizing: border-box;
     height: 130px; /* 高さを50pxに指定 */
-    background: pink; /* 背景色にグレーを指定 */
+     /* 背景色にグレーを指定 background: pink;*/
     padding: 20px 50px; /* ヘッダーに上下左右それぞれ余白を指定 */
     box-sizing: border-box; /* padding分を含んで幅を100%にするため */
     position: fixed; /* ウィンドウを基準に画面に固定 */
@@ -33,6 +35,7 @@ header {
     left: 0; /* 左右の固定位置を左から0pxにする */
     display: flex; /* 中の要素を横並びにする */
     align-items: center; /* 中の要素を上下中央に並べる */
+    z-index: 999;
 }
 
 header .gnav .menu {
@@ -47,11 +50,6 @@ header .gnav .menu li + li {
 #rogo {
 	border-radius: 100px;
 	color: pink;
-}
-/*header {
-  width: 980px;
-  margin: 0 auto;
-  height: 100px;
 }
 header h1 {
 border-radius: 50%;  /* 角丸半径を50%にする(=円形にする) */
@@ -73,6 +71,16 @@ header #header_contact {
   float: left;
   margin: 100px 0 50px;
 }
+
+.container {
+      position: relative;
+      box-sizing: border-box;
+      min-height: 120vh;
+      height: 200px
+      top: -50px;
+      padding-top: 50px
+}
+
 #phone_button{
   display: block;
   position:fixed;
@@ -121,6 +129,7 @@ header #header_contact {
 #main {
   width: 730px;
   float: left;
+
 }
 #sidebar {
   width: 220px;
@@ -186,9 +195,11 @@ footer {
   position: absolute;
   bottom: 0;
   width:100%;
+
 }
 footer #footer_nav {
   padding: 10px 0;
+  text-decoration: none;
 }
 footer #footer_nav ul {
   list-style: none;
@@ -381,9 +392,12 @@ footer small {
 }*/
 
 
-.container {
-      position: relative;
-      padding-bottom: 60px;
-      box-sizing: border-box;
-      min-height: 100vh;
+logoimg{
+    width: 150px;
+    height: auto;
+}
+
+/*リンクの下線消し*/
+a {
+    text-decoration:none;
 }
