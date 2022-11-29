@@ -65,8 +65,12 @@
         <li><a href="{% url 'precomi:profile' %}">プロフィール</a></li>
         <li><a href="{% url 'precomi:diary' %}">日記</a></li>
         <li><a href="{% url 'precomi:talk' %}">コミュニティ</a></li>
+        {% if user.is_authenticated %}
+        <li><a href="{% url 'account_logout' %}">ログアウト</a></li>
+        {% else %}
         <li><a href="{% url 'account_login' %}">ログイン</a></li>
         <li><a href="{% url 'account_signup' %}">サインアップ</a></li>
+        {% endif %}
       </ul>
     </div>
   </footer>

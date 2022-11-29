@@ -104,7 +104,7 @@ class ProfileView(LoginRequiredMixin, generic.ListView):
     template_name = "profile.html"
 
     def get_queryset(self):
-        profile = User.objects.all()
+        profile = User.objects.filter(user=self.request.user)
         return profile
 
 
