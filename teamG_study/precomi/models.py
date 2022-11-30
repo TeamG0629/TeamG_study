@@ -8,11 +8,11 @@ from django.core.validators import MaxValueValidator, MinValueValidator
 #プロフィールモデル
 #(主キー、名前、生年月日、性別、ユーザID、ユーザパスワード、電話番号、妊娠周期、血液型、症状、ユーザタイプ、病院名、画像5枚、最終ログイン)
 class User(models.Model):
+    user = models.ForeignKey(CustomUser, verbose_name='ユーザー', on_delete=models.PROTECT)
     no = models.AutoField(verbose_name='主キー',primary_key=True)
     name = models.CharField(max_length=20,verbose_name='名前',null=False)
     datebirth = models.DateField(verbose_name='生年月日',null=True)
     sex = models.CharField(max_length=1,verbose_name='性別',null=False)
-    user_id = models.CharField(max_length=8,verbose_name='ユーザID',null=False)
     user_pass = models.CharField(max_length=10,verbose_name='ユーザパスワード',null=False)
     telnum = models.CharField(max_length=12,verbose_name='電話番号',null=False)
     precycle = models.IntegerField(validators=[MinValueValidator(8)],verbose_name='妊娠周期',null=False)
