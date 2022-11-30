@@ -43,7 +43,7 @@ class DiaryCreateView(LoginRequiredMixin, generic.CreateView):
     model = Diary
     template_name = "diary_create.html"
     form_class = DiaryCreateForm
-    success_url = reverse_lazy('precomi:diary_detail')
+    success_url = reverse_lazy('precomi:diary')
 
     def form_valid(self, form):
         diary = form.save(commit=False)
