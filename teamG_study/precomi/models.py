@@ -32,7 +32,7 @@ class User(models.Model):
 
     #user_idがレコードで識別する文字列
     def __str__(self):
-        return self.user_id
+        return self.user
 
 
 
