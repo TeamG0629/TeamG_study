@@ -9,7 +9,7 @@ from django.core.mail import EmailMessage
 class UserCreateForm(forms.ModelForm):
     class Meta:
         model = User
-        fields = ('name', 'datebirth','sex','telnum','precycle','bloodtype','symptoms', 'image1')
+        fields = ('name', 'datebirth','sex','telnum','precycle','bloodtype','comment', 'image1')
         widgets = {
             'datebirth': forms.SelectDateWidget(years=[x for x in range(1980, 2022)])
         }
