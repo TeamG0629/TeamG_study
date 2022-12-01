@@ -45,4 +45,23 @@
 	height:auto;
 	object-fit:cover;
     border-radius:50%;
+    border: 1px solid #000000;
+
+}
+.border-bottom{
+    color: #000000;
+}
+
+/*ヘッダーの見出し文字位置*/
+.nav-pills{
+    margin-top:40px;
+    margin-right:100px;
+}
+
+.mlogo{
+    border-radius:50%;
+}
+
+.imgcenter{
+    text-align:center;
 }
