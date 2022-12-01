@@ -40,7 +40,7 @@ class User(models.Model):
 class Diary(models.Model):
     user = models.ForeignKey(CustomUser, verbose_name='ユーザー', on_delete=models.PROTECT)
     title = models.CharField(max_length=50,verbose_name='タイトル',null=False)
-    comment = models.TextField(max_length=100,verbose_name='コメント',null=True)
+    comment = models.TextField(verbose_name='コメント',null=True)
     date = models.DateField(default=timezone.now,verbose_name='日付')
     image1 = models.ImageField(verbose_name='画像1', blank=True, null=True)
     image2 = models.ImageField(verbose_name='画像2', blank=True, null=True)
