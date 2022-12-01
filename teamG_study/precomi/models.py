@@ -6,7 +6,7 @@ from django.core.validators import MaxValueValidator, MinValueValidator
 
 
 #プロフィールモデル
-#(主キー、名前、生年月日、性別、ユーザID、ユーザパスワード、電話番号、妊娠周期、血液型、症状、ユーザタイプ、病院名、画像5枚、最終ログイン)
+#(主キー、名前、生年月日、性別、ユーザID、ユーザパスワード、電話番号、妊娠周期、血液型、症状、ユーザタイプ、病院名、画像5枚、最終ログイン,コメント)
 class User(models.Model):
     user = models.ForeignKey(CustomUser, verbose_name='ユーザー', on_delete=models.PROTECT)
     no = models.AutoField(verbose_name='主キー',primary_key=True)
@@ -26,6 +26,7 @@ class User(models.Model):
     image4 = models.ImageField(verbose_name='画像4',null=True)
     image5 = models.ImageField(verbose_name='画像5',null=True)
     last_login = models.DateTimeField(max_length=8,verbose_name='最終ログイン',auto_now=True)
+    comment = models.TextField(verbose_name='コメント',null=True)
 
     class Meta:
         db_table = 'User_info'
