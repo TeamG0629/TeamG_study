@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% load static %}
+
 {% block contents %}
 
     {% if not user_list %}
@@ -39,5 +40,4 @@
     {% empty %}
         <p>プロフィールがありません。</p>
     {% endfor %}
-
 {% endblock %}
