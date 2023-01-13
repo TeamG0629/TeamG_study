@@ -20,6 +20,14 @@
                           </h2>
                             {% if diary.image1 %}
                                 <img src="{{ diary.image1.url }}" style="width:10%;height:auto;">
+                            {% elif diary.image2 %}
+                                <img src="{{ diary.image2.url }}" style="width:10%;height:auto;">
+                            {% elif diary.image3 %}
+                                <img src="{{ diary.image3.url }}" style="width:10%;height:auto;">
+                            {% elif diary.image4 %}
+                                <img src="{{ diary.image4.url }}" style="width:10%;height:auto;">
+                            {% elif diary.image5 %}
+                                <img src="{{ diary.image5.url }}" style="width:10%;height:auto;">
                             {% endif %}
                         </a>
                         <p class="post-meta">{{ diary.created_at }}</p>

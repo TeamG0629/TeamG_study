@@ -13,11 +13,14 @@
     <div>
         <button type="button"><a href="{% url 'precomi:profile_update' i.pk %}">編集</a></button>
     </div>
-        <div class="flex between imgcenter">
+        <div style="text-align:center">
             {% if i.image1 %}
                 <img src="{{ i.image1.url }}" class="pimg" width="150" height='150'></img>
             {% else %}
             {% endif %}
+        </div>
+        <div class="flex between imgcenter">
+
             <h2 class="item">
                 名前:{{ i.name }}
             </h2>
