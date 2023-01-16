@@ -70,7 +70,7 @@ class InquiryForm(forms.Form):
 class DiaryCreateForm(forms.ModelForm):
     class Meta:
         model = Diary
-        fields = ('title', 'comment', 'image1', 'image2', 'image3', 'image4', 'image5')
+        fields = ('title', 'comment', 'image1', 'image2', 'image3', 'image4', 'image5','publicprivate','publicname')
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)

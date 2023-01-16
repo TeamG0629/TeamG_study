@@ -38,8 +38,12 @@ class User(models.Model):
 
 
 
-#日記モデル(画像5枚、タイトル、コメント、日付)
+#日記モデル(画像5枚、タイトル、コメント、日付、公開非公開設定、公開用ネーム設定)
 class Diary(models.Model):
+    IS_USED_CHOICES = (
+        (True,'公開'),
+        (False, '非公開'),
+    )
     user = models.ForeignKey(CustomUser, verbose_name='ユーザー', on_delete=models.PROTECT)
     title = models.CharField(max_length=50,verbose_name='タイトル',null=False)
     comment = models.TextField(verbose_name='コメント',null=True)
@@ -49,6 +53,8 @@ class Diary(models.Model):
     image3 = models.ImageField(verbose_name='画像3', blank=True, null=True)
     image4 = models.ImageField(verbose_name='画像4', blank=True, null=True)
     image5 = models.ImageField(verbose_name='画像5', blank=True, null=True)
+    publicprivate = models.BooleanField(verbose_name='公開非公開', choices=IS_USED_CHOICES,blank=True, null=True)
+    publicname = models.CharField(verbose_name='公開用ネーム',max_length=50,blank=True, null=True)
     created_at = models.DateTimeField(verbose_name='作成日時', auto_now_add=True)
     class Meta:
         db_table = 'diary_info'
@@ -65,4 +71,10 @@ class Talkchat(models.Model):
     image = models.CharField(max_length=256,verbose_name='画像',null=True)
     class Meta:
         db_table = 'tc_info'
+
+
+
+
+
+
 

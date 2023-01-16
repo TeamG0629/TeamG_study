@@ -10,14 +10,13 @@
     {% endif %}
 
     {% for i in user_list %}
-    <div>
-        <button type="button"><a href="{% url 'precomi:profile_update' i.pk %}">編集</a></button>
-    </div>
-        <div class="flex between imgcenter">
+        <div style="text-align:center">
             {% if i.image1 %}
-                <img src="{{ i.image1.url }}" class="pimg" width="150" height='150'></img>
+                <img src="{{ i.image1.url }}" class="pimg" width="200" height="200"></img>
             {% else %}
             {% endif %}
+        </div>
+        <div class="flex between imgcenter">
             <h2 class="item">
                 名前:{{ i.name }}
             </h2>
@@ -42,6 +41,9 @@
             <h2 class="item">
                 コメント:{{i.comment}}
             </h2>
+        </div>
+        <div style="text-align:right">
+            <a href="{% url 'precomi:profile_update' i.pk %}" class="btn btn-primary">編集</a>
         </div>
     {% empty %}
         <p>プロフィールがありません。</p>

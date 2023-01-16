@@ -35,38 +35,72 @@
             <div class="col-3">
                 <strong>写真</strong>
             </div>
-            <div class="col-3">
+            <div class="w-auto">
                 {% if object.image1 %}
                     <img src="{{ object.image1.url }}" width="200" height="200"/>
                 {% endif %}
-            </div>
-            <div class="col-3">
                 {% if object.image2 %}
                     <img src="{{ object.image2.url }}" width="200" height="200"/>
                 {% endif %}
-            </div>
-            <div class="col-3">
                 {% if object.image3 %}
                     <img src="{{ object.image3.url }}" width="200" height="200"/>
                 {% endif %}
-            </div>
-            <div class="col-3">
                 {% if object.image4 %}
                     <img src="{{ object.image4.url }}" width="200" height="200"/>
                 {% endif %}
-            </div>
-            <div class="col-3">
                 {% if object.image5 %}
                     <img src="{{ object.image5.url }}" width="200" height="200"/>
                 {% endif %}
             </div>
         </div>
 
+        <hr>
 
+         <div class="row">
+            <div class="col-3">
+                <strong>公開非公開</strong>
+            </div>
+            <div class="col-9">
+                {% if object.publicprivate == True %}
+                    公開
+                {% elif object.publicprivate == False %}
+                    非公開
+                {% endif %}
 
-        <a class="btn btn-success mt-5 mb-3" href="{% url 'precomi:diary' %}">戻る</a>
-        <a class="btn btn-success mt-5 mb-3" href="{% url 'precomi:diary_update' object.pk %}">編集</a>
-        <a class="btn btn-danger mt-5 ml-2 mb-3" href="{% url 'precomi:diary_delete' object.pk %}">削除</a>
+            </div>
+        </div>
+
+        <hr>
+
+        <div class="row">
+            <div class="col-3">
+                <strong>公開用ネーム</strong>
+            </div>
+            <div class="col-9">
+                {{object.publicname}}
+            </div>
+        </div>
+
+        <hr>
+        <div class="row">
+            <div style="col-3">
+                <strong>みんなのコメント</strong>
+            </div>
+        </div>
+
+        <hr>
+
+        <div>
+         {% if object.user_id == request.user.id %}
+            <a class="btn btn-success mt-5 mb-3" href="{% url 'precomi:diary' %}">戻る</a>
+         {% else %}
+            <a class="btn btn-success mt-5 mb-3" href="{% url 'precomi:alldiary' %}">戻る</a>
+         {% endif %}
+         {% if object.user_id == request.user.id %}
+            <a class="btn btn-success mt-5 mb-3" href="{% url 'precomi:diary_update' object.pk %}">編集</a>
+            <a class="btn btn-danger mt-5 ml-2 mb-3" href="{% url 'precomi:diary_delete' object.pk %}">削除</a>
+         {% endif %}
+        </div>
     </div>
 </div>
 {% endblock %}
