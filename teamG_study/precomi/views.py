@@ -27,7 +27,7 @@ class NoticeView(generic.TemplateView):
 class DiaryView(LoginRequiredMixin, generic.ListView):
     model = Diary
     template_name = "diary.html"
-    paginate_by = 2
+    paginate_by = 4
 
     def get_queryset(self):
         diaries = Diary.objects.filter(user=self.request.user).order_by('-created_at')
@@ -83,6 +83,11 @@ class DiaryDeleteView(generic.DeleteView):
         messages.success(self.request, "日記を削除しました。")
         return super().delete(request, *args, **kwargs)
 
+#全体表示日記htmlに飛ばす
+class AlldiaryView(generic.ListView):
+    model = Diary
+    template_name = "alldiary.html"
+    paginate_by = 4
 
 # #======================================================
 
@@ -143,3 +148,46 @@ class ProfileUpdateView(LoginRequiredMixin, generic.UpdateView):
         return super().form_invalid(form)
 
 
+#proprofile.htmlに飛ばす
+class PrpprofileView(LoginRequiredMixin, generic.ListView):
+    model = User
+    template_name = "proprofile.html"
+
+    def get_queryset(self):
+        profile = User.objects.filter(user=self.request.user)
+        return profile
+
+
+class ProprofileCreateView(LoginRequiredMixin, generic.CreateView):
+    model = User
+    template_name = 'proprofile_create.html'
+    form_class = UserCreateForm
+    success_url = reverse_lazy('precomi:proprofile')
+
+    def form_valid(self, form):
+        user = form.save(commit=False)
+        user.user = self.request.user
+        user.save()
+        messages.success(self.request, '作成しました')
+        return super().form_valid(form)
+
+    def form_invalid(self, form):
+        messages.error(self.request, "作成に失敗しました")
+        return super().form_invalid(form)
+
+#proprofile_update.htmlに飛ばす
+class ProprofileUpdateView(LoginRequiredMixin, generic.UpdateView):
+    model = User
+    template_name = "proprofile_update.html"
+    form_class = UserCreateForm
+
+    def get_success_url(self):
+        return reverse_lazy('precomi:prpprofile')
+
+    def form_valid(self, form):
+        messages.success(self.request, 'プロフィールを更新しました。')
+        return super().form_valid(form)
+
+    def form_invalid(self, form):
+        messages.error(self.request, "プロフィールの更新に失敗しました。")
+        return super().form_invalid(form)

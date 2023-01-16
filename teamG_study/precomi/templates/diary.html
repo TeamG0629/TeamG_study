@@ -30,6 +30,13 @@
                                 <img src="{{ diary.image5.url }}" style="width:10%;height:auto;">
                             {% endif %}
                         </a>
+                        <p>
+                            {% if diary.publicprivate == True %}
+                                公開
+                            {% elif diary.publicprivate == False %}
+                                非公開
+                            {% endif %}
+                        </p>
                         <p class="post-meta">{{ diary.created_at }}</p>
                     </div>
                     <hr>

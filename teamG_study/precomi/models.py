@@ -6,7 +6,7 @@ from django.core.validators import MaxValueValidator, MinValueValidator
 
 
 #プロフィールモデル
-#(主キー、名前、生年月日、性別、ユーザID、ユーザパスワード、電話番号、妊娠周期、血液型、症状、ユーザタイプ、病院名、画像5枚、最終ログイン,コメント)
+#(主キー、名前、生年月日、性別、ユーザパスワード、電話番号、妊娠周期、血液型、症状、ユーザタイプ、病院名、画像5枚、最終ログイン,コメント,緊急連絡先)
 class User(models.Model):
     user = models.ForeignKey(CustomUser, verbose_name='ユーザー', on_delete=models.PROTECT)
     no = models.AutoField(verbose_name='主キー',primary_key=True)
@@ -27,6 +27,7 @@ class User(models.Model):
     image5 = models.ImageField(verbose_name='画像5',null=True)
     last_login = models.DateTimeField(max_length=8,verbose_name='最終ログイン',auto_now=True)
     comment = models.TextField(verbose_name='コメント',null=True)
+    egcontact = models.EmailField(verbose_name='緊急連絡先',null=True)
 
     class Meta:
         db_table = 'User_info'
@@ -37,8 +38,12 @@ class User(models.Model):
 
 
 
-#日記モデル(画像5枚、タイトル、コメント、日付)
+#日記モデル(画像5枚、タイトル、コメント、日付、公開非公開設定、公開用ネーム設定)
 class Diary(models.Model):
+    IS_USED_CHOICES = (
+        (True,'公開'),
+        (False, '非公開'),
+    )
     user = models.ForeignKey(CustomUser, verbose_name='ユーザー', on_delete=models.PROTECT)
     title = models.CharField(max_length=50,verbose_name='タイトル',null=False)
     comment = models.TextField(verbose_name='コメント',null=True)
@@ -48,6 +53,8 @@ class Diary(models.Model):
     image3 = models.ImageField(verbose_name='画像3', blank=True, null=True)
     image4 = models.ImageField(verbose_name='画像4', blank=True, null=True)
     image5 = models.ImageField(verbose_name='画像5', blank=True, null=True)
+    publicprivate = models.BooleanField(verbose_name='公開非公開', choices=IS_USED_CHOICES,blank=True, null=True)
+    publicname = models.CharField(verbose_name='公開用ネーム',max_length=50,blank=True, null=True)
     created_at = models.DateTimeField(verbose_name='作成日時', auto_now_add=True)
     class Meta:
         db_table = 'diary_info'
@@ -64,4 +71,10 @@ class Talkchat(models.Model):
     image = models.CharField(max_length=256,verbose_name='画像',null=True)
     class Meta:
         db_table = 'tc_info'
+
+
+
+
+
+
 

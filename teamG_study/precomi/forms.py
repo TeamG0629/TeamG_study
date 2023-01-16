@@ -5,11 +5,11 @@ from django.core.mail import EmailMessage
 
 
 
-#ユーザプロフィールの新規作成(誕生日、性別、電話番号、妊娠周期、血液型、症状)
+#ユーザプロフィールの新規作成(誕生日、性別、電話番号、妊娠周期、血液型、コメント、緊急連絡先)
 class UserCreateForm(forms.ModelForm):
     class Meta:
         model = User
-        fields = ('name', 'datebirth','sex','telnum','precycle','bloodtype','comment', 'image1')
+        fields = ('name', 'datebirth','sex','telnum','precycle','bloodtype','comment', 'image1','egcontact')
         widgets = {
             'datebirth': forms.SelectDateWidget(years=[x for x in range(1980, 2022)])
         }
@@ -70,7 +70,7 @@ class InquiryForm(forms.Form):
 class DiaryCreateForm(forms.ModelForm):
     class Meta:
         model = Diary
-        fields = ('title', 'comment', 'image1', 'image2', 'image3', 'image4', 'image5')
+        fields = ('title', 'comment', 'image1', 'image2', 'image3', 'image4', 'image5','publicprivate','publicname')
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)

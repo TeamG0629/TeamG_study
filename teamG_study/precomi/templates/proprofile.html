@@ -1,0 +1,43 @@
+% extends 'base.html' %}
+{% load static %}
+
+{% block contents %}
+
+    {% if not user_list %}
+        <div>
+            <button type="button"><a href="#">新規</a></button>
+        </div>
+    {% endif %}
+
+    {% for i in user_list %}
+    <div>
+        <button type="button"><a href="#">編集</a></button>
+    </div>
+        <div class="flex between imgcenter">
+            {% if i.image1 %}
+                <img src="{{ i.image1.url }}" class="pimg" width="150" height='150'></img>
+            {% else %}
+            {% endif %}
+            <h2 class="item">
+                名前:{{ i.name }}
+            </h2>
+            <h2 class="item">
+                性別:{{i.sex}}
+            </h2>
+            <h2 class="item">
+                病院名:{{i.hospitalname}}
+            </h2>
+            <h2 class="item">
+                電話番号:{{i.telnum}}
+            </h2>
+            <h2 class="item">
+                緊急連絡先:{{i.egcontact}}
+            </h2>
+            <h2 class="item">
+                コメント:{{i.comment}}
+            </h2>
+        </div>
+    {% empty %}
+        <p>プロフィールがありません。</p>
+    {% endfor %}
+{% endblock %}
