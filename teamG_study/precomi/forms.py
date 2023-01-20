@@ -1,15 +1,13 @@
 import os
 from django import forms
-from .models import User, Diary
+from .models import User, Diary, DiaryComment
 from django.core.mail import EmailMessage
-
-
 
 #ユーザプロフィールの新規作成(誕生日、性別、電話番号、妊娠周期、血液型、コメント、緊急連絡先)
 class UserCreateForm(forms.ModelForm):
     class Meta:
         model = User
-        fields = ('name', 'datebirth','sex','telnum','precycle','bloodtype','comment', 'image1','egcontact')
+        fields = ('name', 'datebirth','telnum','precycle','bloodtype','comment', 'image1','egcontact')
         widgets = {
             'datebirth': forms.SelectDateWidget(years=[x for x in range(1980, 2022)])
         }
@@ -76,3 +74,12 @@ class DiaryCreateForm(forms.ModelForm):
         super().__init__(*args, **kwargs)
         for field in self.fields.values():
             field.widget.attrs['class'] = 'form-control'
+
+
+
+
+#コメント投稿フォーム
+class CommentCreateForm(forms.ModelForm):
+    class Meta:
+        model = DiaryComment
+        exclude = ('target', 'created_at')

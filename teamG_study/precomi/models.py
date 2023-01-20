@@ -12,7 +12,6 @@ class User(models.Model):
     no = models.AutoField(verbose_name='主キー',primary_key=True)
     name = models.CharField(max_length=20,verbose_name='名前',null=False)
     datebirth = models.DateField(verbose_name='生年月日',null=True)
-    sex = models.CharField(max_length=1,verbose_name='性別',null=False)
     user_pass = models.CharField(max_length=10,verbose_name='ユーザパスワード',null=False)
     telnum = models.CharField(max_length=12,verbose_name='電話番号',null=False)
     precycle = models.IntegerField(validators=[MinValueValidator(8)],verbose_name='妊娠周期',null=False)
@@ -65,14 +64,21 @@ class Diary(models.Model):
 #トークチャットモデル(名前、性別、ユーザID、ユーザタイプ、画像1枚)
 class Talkchat(models.Model):
     name = models.CharField(max_length=20,verbose_name='名前',null=False)
-    sex = models.CharField(max_length=1,verbose_name='性別',null=False)
     user_id = models.CharField(max_length=8,verbose_name='ユーザID',null=False)
     user_type = models.CharField(max_length=1,verbose_name='ユーザタイプ',null=False)
     image = models.CharField(max_length=256,verbose_name='画像',null=True)
     class Meta:
         db_table = 'tc_info'
 
+#コメントモデル
+class DiaryComment(models.Model):
+    user_name = models.CharField('名前', max_length=255, default='名無し')
+    message = models.TextField('本文')
+    target = models.ForeignKey(Diary, on_delete=models.CASCADE, verbose_name='対象記事', null=True)
+    created_at = models.DateTimeField('作成日', default=timezone.now)
 
+    def __str__(self):
+        return self.message[:20]
 
 
 

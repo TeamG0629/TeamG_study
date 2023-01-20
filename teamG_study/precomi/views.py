@@ -1,10 +1,15 @@
 from django.shortcuts import render
 from django.views import generic
-from .forms import UserCreateForm, DiaryCreateForm, InquiryForm
-from  django.contrib.auth.mixins import LoginRequiredMixin,UserPassesTestMixin
-from .models import User, Diary
+from .forms import UserCreateForm, DiaryCreateForm, InquiryForm, CommentCreateForm
+from django.contrib.auth.mixins import LoginRequiredMixin,UserPassesTestMixin
+from .models import User, Diary, DiaryComment
 from django.contrib import messages
 from django.urls import reverse_lazy
+
+from django.shortcuts import redirect, get_object_or_404
+from django.views.generic import DetailView
+from django.views.generic.edit import CreateView
+from django import forms
 
 
 import logging
@@ -84,10 +89,14 @@ class DiaryDeleteView(generic.DeleteView):
         return super().delete(request, *args, **kwargs)
 
 #全体表示日記htmlに飛ばす
-class AlldiaryView(generic.ListView):
+class AlldiaryView(LoginRequiredMixin, generic.ListView):
     model = Diary
     template_name = "alldiary.html"
     paginate_by = 4
+
+    def get_queryset(self):
+        diaries = Diary.objects.all().exclude(user=self.request.user).filter(publicprivate=True).order_by('-created_at')
+        return diaries
 
 # #======================================================
 
@@ -191,3 +200,22 @@ class ProprofileUpdateView(LoginRequiredMixin, generic.UpdateView):
     def form_invalid(self, form):
         messages.error(self.request, "プロフィールの更新に失敗しました。")
         return super().form_invalid(form)
+
+#コメント投稿ページのビュー
+class CommentView(generic.CreateView):
+    template_name = 'comment_form.html'
+    model = DiaryComment
+    form_class = CommentCreateForm
+
+    def form_valid(self, form):
+        post_pk = self.kwargs['pk']
+        post = get_object_or_404(Diary, pk=post_pk)
+        comment = form.save(commit=False)
+        comment.target = post
+        comment.save()
+        return redirect('precomi:diary_detail', pk=post_pk)
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['post'] = get_object_or_404(Diary, pk=self.kwargs['pk'])
+        return context
