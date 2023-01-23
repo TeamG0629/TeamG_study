@@ -7,8 +7,6 @@ from django.contrib import messages
 from django.urls import reverse_lazy
 
 from django.shortcuts import redirect, get_object_or_404
-from django.views.generic import DetailView
-from django.views.generic.edit import CreateView
 from django import forms
 
 
@@ -157,53 +155,9 @@ class ProfileUpdateView(LoginRequiredMixin, generic.UpdateView):
         return super().form_invalid(form)
 
 
-#proprofile.htmlに飛ばす
-class PrpprofileView(LoginRequiredMixin, generic.ListView):
-    model = User
-    template_name = "proprofile.html"
-
-    def get_queryset(self):
-        profile = User.objects.filter(user=self.request.user)
-        return profile
-
-
-class ProprofileCreateView(LoginRequiredMixin, generic.CreateView):
-    model = User
-    template_name = 'proprofile_create.html'
-    form_class = UserCreateForm
-    success_url = reverse_lazy('precomi:proprofile')
-
-    def form_valid(self, form):
-        user = form.save(commit=False)
-        user.user = self.request.user
-        user.save()
-        messages.success(self.request, '作成しました')
-        return super().form_valid(form)
-
-    def form_invalid(self, form):
-        messages.error(self.request, "作成に失敗しました")
-        return super().form_invalid(form)
-
-#proprofile_update.htmlに飛ばす
-class ProprofileUpdateView(LoginRequiredMixin, generic.UpdateView):
-    model = User
-    template_name = "proprofile_update.html"
-    form_class = UserCreateForm
-
-    def get_success_url(self):
-        return reverse_lazy('precomi:prpprofile')
-
-    def form_valid(self, form):
-        messages.success(self.request, 'プロフィールを更新しました。')
-        return super().form_valid(form)
-
-    def form_invalid(self, form):
-        messages.error(self.request, "プロフィールの更新に失敗しました。")
-        return super().form_invalid(form)
-
 #コメント投稿ページのビュー
 class CommentView(generic.CreateView):
-    template_name = 'comment_form.html'
+    template_name = 'comment_create.html'
     model = DiaryComment
     form_class = CommentCreateForm
 
@@ -219,3 +173,16 @@ class CommentView(generic.CreateView):
         context = super().get_context_data(**kwargs)
         context['post'] = get_object_or_404(Diary, pk=self.kwargs['pk'])
         return context
+
+class CommentListView(generic.ListView):
+    model = DiaryComment
+    template_name = 'comment_list.html'
+
+    # def get_queryset(self):
+    #     comments = DiaryComment.objects.all()
+    #     return comments
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context = super(CommentListView, self).get_context_data()
+        context['comment_list'] = DiaryComment.objects.all()
+        return context
+

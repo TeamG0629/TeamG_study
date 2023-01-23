@@ -85,6 +85,12 @@
         <div class="row">
             <div style="col-3">
                 <strong>みんなのコメント</strong>
+                <div class="clearfix">
+                    <a class="btn btn-primary float-right" href="{% url 'precomi:comment_create' object.pk%}">コメントをする</a>
+                </div>
+                <div class="clearfix">
+                    <a class="btn btn-primary float-right" href="{% url 'precomi:comment_list' object.pk%}">コメントをみる</a>
+                </div>
             </div>
         </div>
 
