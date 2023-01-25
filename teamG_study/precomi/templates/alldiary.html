@@ -11,7 +11,6 @@
             <div class="col-lg-8 col-md-10 mx-auto">
                 {% for diary in diary_list %}
                     {% if diary.publicprivate == True %}
-                        {% if diary.user_id != request.user.id %}
                             <div class="post-preview">
                                 <a href="{% url 'precomi:diary_detail' diary.pk %}">
                                   <h2 class="post-title">
@@ -32,7 +31,6 @@
                                 <p class="post-meta">{{ diary.created_at }}</p>
                             </div>
                             <hr>
-                        {% endif %}
                     {% endif %}
                 {% empty %}
                     <p>日記がありません。</p>

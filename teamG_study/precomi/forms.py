@@ -1,6 +1,6 @@
 import os
 from django import forms
-from .models import User, Diary
+from .models import User, Diary ,DiaryComment
 from django.core.mail import EmailMessage
 
 
@@ -76,3 +76,11 @@ class DiaryCreateForm(forms.ModelForm):
         super().__init__(*args, **kwargs)
         for field in self.fields.values():
             field.widget.attrs['class'] = 'form-control'
+
+
+
+#コメント投稿フォーム
+class CommentCreateForm(forms.ModelForm):
+    class Meta:
+        model = DiaryComment
+        exclude = ('target','created_at')

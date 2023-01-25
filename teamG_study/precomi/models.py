@@ -74,7 +74,14 @@ class Talkchat(models.Model):
 
 
 
+#日記コメント(名前、コメント、日時、対象コメント)
+class DiaryComment(models.Model):
+    name = models.CharField('名前',max_length=255,default='名無し')
+    comment = models.TextField('本文')
+    target = models.ForeignKey(Diary, on_delete=models.CASCADE, verbose_name='対象記事',null=True)
+    created_at = models.DateTimeField('作成日', default=timezone.now)
 
-
+    def __str__(self):
+        return self.comment[:20]
 
 

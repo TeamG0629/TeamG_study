@@ -86,6 +86,18 @@
             <div style="col-3">
                 <strong>みんなのコメント</strong>
             </div>
+            <div style="col-9">
+                <!--コメント-->
+                {% for comment in commentss %}
+                <div class="comment-list">
+                    <div class='border-bottom'>{{ comment.name }}　{{ comment.created_at }}</div>
+                    <!--改行しないようlinebreaksを設定,URL要素に<a>要素を設定-->
+                    <div class='mt-2'>{{ comment.comment | linebreaks | urlize }}</div>
+                </div>
+                {% empty %}
+                <p>コメントはありません</p>
+                {% endfor %}
+            </div>
         </div>
 
         <hr>
@@ -95,6 +107,7 @@
             <a class="btn btn-success mt-5 mb-3" href="{% url 'precomi:diary' %}">戻る</a>
          {% else %}
             <a class="btn btn-success mt-5 mb-3" href="{% url 'precomi:alldiary' %}">戻る</a>
+            <a href="{% url 'precomi:comment_create' object.pk %}" class="btn btn-success mt-5 mb-3">コメントする</a>
          {% endif %}
          {% if object.user_id == request.user.id %}
             <a class="btn btn-success mt-5 mb-3" href="{% url 'precomi:diary_update' object.pk %}">編集</a>

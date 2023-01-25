@@ -183,6 +183,12 @@ MESSAGE_TAGS = {
 }
 #取り合わせのemail address 設定
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+# EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+# EMAIL_USE_TLS = True
+# EMAIL_HOST = 'smtp-mail.outlook.com'
+# EMAIL_HOST_USER = 'ykh2135238@stu.o-hara.ac.jp'
+# EMAIL_HOST_PASSWORD = 'Kanta0915'
+# EMAIL_PORT = 587
 
 
 AUTHENTICATION_BACKENDS = (
@@ -203,6 +209,7 @@ ACCOUNT_LOGOUT_ON_GET = True
 ACCOUNT_EMAIL_SUBJECT_PREFIX = ''
 
 DEFAULT_FROM_EMAIL = os.environ.get('FROM_EMAIL')
+# DEFAULT_FROM_EMAIL = 'ykh2135238@stu.o-hara.ac.jp'
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
