@@ -2,7 +2,7 @@ from django.db import models
 from django.utils import timezone
 from accounts.models import CustomUser
 from django.core.validators import MaxValueValidator, MinValueValidator
-
+from django.core.validators import RegexValidator
 
 
 #プロフィールモデル
@@ -13,7 +13,8 @@ class User(models.Model):
     name = models.CharField(max_length=20,verbose_name='名前',null=False)
     datebirth = models.DateField(verbose_name='生年月日',null=True)
     user_pass = models.CharField(max_length=10,verbose_name='ユーザパスワード',null=False)
-    telnum = models.CharField(max_length=12,verbose_name='電話番号',null=False)
+    tel_number_regex = RegexValidator(regex=r'^[0-9]+$', message=("半角数字のみを入力してください"))
+    telnum = models.CharField(validators=[tel_number_regex], max_length=15, verbose_name='電話番号', null=False)
     precycle = models.IntegerField(validators=[MinValueValidator(8)],verbose_name='妊娠周期',null=False)
     bloodtype = models.CharField(max_length=2,verbose_name='血液型',null=True)
     symptoms = models.CharField(max_length=100,verbose_name='症状',null=True)
@@ -71,16 +72,16 @@ class Talkchat(models.Model):
         db_table = 'tc_info'
 
 #コメントモデル
+
+
+#日記コメント(名前、コメント、日時、対象コメント)
 class DiaryComment(models.Model):
-    user_name = models.CharField('名前', max_length=255, default='名無し')
-    message = models.TextField('本文')
-    target = models.ForeignKey(Diary, on_delete=models.CASCADE, verbose_name='対象記事', null=True)
+    name = models.CharField('名前',max_length=255,default='名無し')
+    comment = models.TextField('本文')
+    target = models.ForeignKey(Diary, on_delete=models.CASCADE, verbose_name='対象記事',null=True)
     created_at = models.DateTimeField('作成日', default=timezone.now)
 
     def __str__(self):
-        return self.message[:20]
-
-
-
+        return self.comment[:20]
 
 

@@ -1,13 +1,13 @@
-from django.shortcuts import render
+from django.shortcuts import render,redirect,get_object_or_404
 from django.views import generic
-from .forms import UserCreateForm, DiaryCreateForm, InquiryForm, CommentCreateForm
-from django.contrib.auth.mixins import LoginRequiredMixin,UserPassesTestMixin
-from .models import User, Diary, DiaryComment
+from .forms import UserCreateForm, DiaryCreateForm, InquiryForm ,CommentCreateForm
+from  django.contrib.auth.mixins import LoginRequiredMixin,UserPassesTestMixin
+from .models import User, Diary ,DiaryComment
 from django.contrib import messages
 from django.urls import reverse_lazy
 
-from django.shortcuts import redirect, get_object_or_404
-from django import forms
+#実験
+from django.views.generic.edit import CreateView
 
 
 import logging
@@ -40,6 +40,12 @@ class DiaryView(LoginRequiredMixin, generic.ListView):
 class DiaryDetailView(LoginRequiredMixin, generic.DetailView):
     model = Diary
     template_name = 'diary_detail.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        print((self.kwargs['pk']))
+        context['commentss'] = DiaryComment.objects.filter(target=Diary.objects.get(id=self.kwargs['pk']))
+        return context
 
 #diary作成
 class DiaryCreateView(LoginRequiredMixin, generic.CreateView):
@@ -87,15 +93,44 @@ class DiaryDeleteView(generic.DeleteView):
         return super().delete(request, *args, **kwargs)
 
 #全体表示日記htmlに飛ばす
-class AlldiaryView(LoginRequiredMixin, generic.ListView):
+class AlldiaryView(LoginRequiredMixin,generic.ListView):
     model = Diary
     template_name = "alldiary.html"
     paginate_by = 4
+
 
     def get_queryset(self):
         diaries = Diary.objects.all().exclude(user=self.request.user).filter(publicprivate=True).order_by('-created_at')
         return diaries
 
+#コメント投稿ページのビュー
+class CommentView(CreateView):
+    template_name = 'comment_form.html'
+    model = DiaryComment
+    form_class = CommentCreateForm
+    #success_url = '/'
+
+    #フォームに入力された情報が正しい場合の処理
+    def form_valid(self, form):
+        post_pk = self.kwargs['pk']
+        post = get_object_or_404(Diary,pk=post_pk)
+        comment = form.save(commit=False)
+        comment.target = post
+        comment.save()
+        print("ヴァリデーションOK")
+        # print("ここまでやってる")
+        # return redirect('/')
+        return redirect('precomi:diary_detail',pk=post_pk)
+    # diary-detail/2/
+    def form_invalid(self, form):
+        print("ヴァリデーションNG")
+        return redirect('/')
+
+    #htmlテンプレートに渡すデータを定義
+    def get_context_data(self,**kwargs):
+        context = super().get_context_data(**kwargs)
+        context['post'] = get_object_or_404(Diary,pk=self.kwargs['pk'])
+        return context
 # #======================================================
 
 class InquiryView(generic.FormView):
@@ -136,7 +171,6 @@ class ProfileCreateView(LoginRequiredMixin, generic.CreateView):
     def form_invalid(self, form):
         messages.error(self.request, "作成に失敗しました")
         return super().form_invalid(form)
-
 #profile_update.htmlに飛ばす
 class ProfileUpdateView(LoginRequiredMixin, generic.UpdateView):
     model = User
@@ -153,36 +187,4 @@ class ProfileUpdateView(LoginRequiredMixin, generic.UpdateView):
     def form_invalid(self, form):
         messages.error(self.request, "プロフィールの更新に失敗しました。")
         return super().form_invalid(form)
-
-
-#コメント投稿ページのビュー
-class CommentView(generic.CreateView):
-    template_name = 'comment_create.html'
-    model = DiaryComment
-    form_class = CommentCreateForm
-
-    def form_valid(self, form):
-        post_pk = self.kwargs['pk']
-        post = get_object_or_404(Diary, pk=post_pk)
-        comment = form.save(commit=False)
-        comment.target = post
-        comment.save()
-        return redirect('precomi:diary_detail', pk=post_pk)
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['post'] = get_object_or_404(Diary, pk=self.kwargs['pk'])
-        return context
-
-class CommentListView(generic.ListView):
-    model = DiaryComment
-    template_name = 'comment_list.html'
-
-    # def get_queryset(self):
-    #     comments = DiaryComment.objects.all()
-    #     return comments
-    def get_context_data(self, *, object_list=None, **kwargs):
-        context = super(CommentListView, self).get_context_data()
-        context['comment_list'] = DiaryComment.objects.all()
-        return context
 

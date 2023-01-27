@@ -1,15 +1,19 @@
 import os
 from django import forms
-from .models import User, Diary, DiaryComment
+from .models import User, Diary ,DiaryComment
 from django.core.mail import EmailMessage
+
+import datetime
+
 
 #ユーザプロフィールの新規作成(誕生日、性別、電話番号、妊娠周期、血液型、コメント、緊急連絡先)
 class UserCreateForm(forms.ModelForm):
     class Meta:
         model = User
+        today = datetime.date.today()
         fields = ('name', 'datebirth','telnum','precycle','bloodtype','comment', 'image1','egcontact')
         widgets = {
-            'datebirth': forms.SelectDateWidget(years=[x for x in range(1980, 2022)])
+            'datebirth': forms.SelectDateWidget(years=[x for x in range(today.year-50, today.year+1)])
         }
         MONTHS = {
             1: 'jan', 2: 'feb', 3: 'mar', 4: 'apr',
@@ -77,9 +81,8 @@ class DiaryCreateForm(forms.ModelForm):
 
 
 
-
 #コメント投稿フォーム
 class CommentCreateForm(forms.ModelForm):
     class Meta:
         model = DiaryComment
-        exclude = ('target', 'created_at')
+        exclude = ('target','created_at')

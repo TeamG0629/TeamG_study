@@ -5,7 +5,7 @@
 
     {% if not user_list %}
         <div>
-            <button type="button"><a href="{% url 'precomi:profile_create' %}">新規</a></button>
+            <a class="btn btn-primary float-right" href="{% url 'precomi:profile_create' %}">新規</a>
         </div>
     {% endif %}
 
