@@ -1,0 +1,16 @@
+<div class="container col-lg-6 offset-lg-3">
+
+    <!---記事タイトルを表示-->
+    <h2 class="titleline"><span>{{ post.title }}</span></h2>
+    <form action="" method="POST" id="comment-form">
+        {% csrf_token %}
+        <table class="table">
+            {{ form.as_table }}
+        </table>
+
+        <div class="row my-3">
+            <button type="submit" class="btn btn-success col-3 offset-2">投稿する</button>
+            <a class="btn btn-danger col-3 offset-2" href="{% url 'precomi:diary_detail' post.pk %}">キャンセル</a>
+        </div>
+    </form>
+</div>

@@ -11,7 +11,7 @@
 
 {% for comment in comment_list %}
 <div class="comment-list">
-    <div class='border-bottom'>{{ comment.user_name }}　{{ comment.created_at }}</div class='border-bottom'>
+    <div class='border-bottom'>{{ comment.user_name }}　{{ comment.created_at }}</div>
     <!--改行しないようlinebreaksを設定,URL要素に<a>要素を設定-->
     <div class='mt-2'>{{ comment.message | linebreaks | urlize }}</div>
 </div>

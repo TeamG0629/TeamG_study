@@ -101,6 +101,7 @@ class AlldiaryView(LoginRequiredMixin,generic.ListView):
 
     def get_queryset(self):
         diaries = Diary.objects.all().exclude(user=self.request.user).filter(publicprivate=True).order_by('-created_at')
+
         return diaries
 
 #コメント投稿ページのビュー

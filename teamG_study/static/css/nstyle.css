@@ -123,3 +123,7 @@
 #id_comment {
   resize: none;
 }
+
+#com_num {
+  text-align: right;
+}

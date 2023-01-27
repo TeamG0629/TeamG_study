@@ -8,15 +8,21 @@ from django.core.validators import RegexValidator
 #プロフィールモデル
 #(主キー、名前、生年月日、性別、ユーザパスワード、電話番号、妊娠周期、血液型、症状、ユーザタイプ、病院名、画像5枚、最終ログイン,コメント,緊急連絡先)
 class User(models.Model):
+    blood = (
+        ("A","A型"),
+        ("B","B型"),
+        ("AB","AB型"),
+        ("O","O型")
+    )
     user = models.ForeignKey(CustomUser, verbose_name='ユーザー', on_delete=models.PROTECT)
     no = models.AutoField(verbose_name='主キー',primary_key=True)
     name = models.CharField(max_length=20,verbose_name='名前',null=False)
     datebirth = models.DateField(verbose_name='生年月日',null=True)
     user_pass = models.CharField(max_length=10,verbose_name='ユーザパスワード',null=False)
     tel_number_regex = RegexValidator(regex=r'^[0-9]+$', message=("半角数字のみを入力してください"))
-    telnum = models.CharField(validators=[tel_number_regex], max_length=15, verbose_name='電話番号', null=False)
+    telnum = models.CharField(validators=[tel_number_regex], max_length=12, verbose_name='電話番号', null=False)
     precycle = models.IntegerField(validators=[MinValueValidator(8)],verbose_name='妊娠周期',null=False)
-    bloodtype = models.CharField(max_length=2,verbose_name='血液型',null=True)
+    bloodtype = models.CharField(max_length=2,verbose_name='血液型', choices=blood, null=True)
     symptoms = models.CharField(max_length=100,verbose_name='症状',null=True)
     user_type = models.CharField(max_length=1,verbose_name='ユーザタイプ',null=False)
     hospitalname = models.CharField(max_length=50,verbose_name='病院名',null=True)
