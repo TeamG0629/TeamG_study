@@ -127,3 +127,30 @@
 #com_num {
   text-align: right;
 }
+
+/*プロフィール*/
+#prof_id {
+  margin-left:200px;
+  margin-top:30px;
+}
+
+/*プロフィール*/
+.prof_data {
+  text-align:left;
+}
+
+/*日記詳細の画像サイズ*/
+.img_size {
+  width:200px;
+  height:200px;
+}
+
+/*各日記のサムネイル*/
+.thumbnail {
+  width:10%;
+  height:auto;
+}
+
+.chat_area {
+  text-align:center;
+}

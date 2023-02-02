@@ -37,19 +37,24 @@
             </div>
             <div class="w-auto">
                 {% if object.image1 %}
-                    <img src="{{ object.image1.url }}" width="200" height="200"/>
+                    <a href="{{ object.image1.url }}" data-lightbox="group">
+                        <img src="{{ object.image1.url }}" class="img_size"/></a>
                 {% endif %}
                 {% if object.image2 %}
-                    <img src="{{ object.image2.url }}" width="200" height="200"/>
+                    <a href="{{ object.image2.url }}" data-lightbox="group">
+                    <img src="{{ object.image2.url }}" class="img_size"/></a>
                 {% endif %}
                 {% if object.image3 %}
-                    <img src="{{ object.image3.url }}" width="200" height="200"/>
+                    <a href="{{ object.image3.url }}" data-lightbox="group">
+                    <img src="{{ object.image3.url }}" class="img_size"/></a>
                 {% endif %}
                 {% if object.image4 %}
-                    <img src="{{ object.image4.url }}" width="200" height="200"/>
+                    <a href="{{ object.image4.url }}" data-lightbox="group">
+                    <img src="{{ object.image4.url }}" class="img_size" /></a>
                 {% endif %}
                 {% if object.image5 %}
-                    <img src="{{ object.image5.url }}" width="200" height="200"/>
+                    <a href="{{ object.image5.url }}" data-lightbox="group" >
+                    <img src="{{ object.image5.url }}" class="img_size"/></a>
                 {% endif %}
             </div>
         </div>
@@ -88,7 +93,7 @@
             </div>
             <div style="col-9">
                 <!--コメント-->
-                {% for comment in commentss %}
+                {% for comment in comments %}
                 <div class="comment-list">
                     <div class='border-bottom'>{{ comment.name }}　{{ comment.created_at }}</div>
                     <!--改行しないようlinebreaksを設定,URL要素に<a>要素を設定-->

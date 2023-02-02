@@ -1,6 +1,7 @@
 from pathlib import Path
 import os
 from django.contrib.messages import constants as messages
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -20,21 +21,23 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'daphne',
+    "channels",
+    'precomi.apps.PrecomiConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-
     # アプリケーションの登録
-    'precomi.apps.PrecomiConfig',
     'accounts.apps.AccountsConfig',
-
     'django.contrib.sites',
     'allauth',
     'allauth.account',
     'django_bootstrap5',
+
+
 ]
 
 MIDDLEWARE = [
@@ -110,6 +113,21 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'teamG_study.wsgi.application'
 
+
+# CHANNEL_LAYERS = {
+#     "default": {
+#         "BACKEND": "channels_redis.core.RedisChannelLayer",
+#         "CONFIG": {
+#             "hosts": [("127.0.0.1", 6379)],
+#         },
+#     },
+# }
+
+CHANNEL_LAYERS = {
+    "default": {
+        "BACKEND": "channels.layers.InMemoryChannelLayer"
+    }
+}
 
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
@@ -214,3 +232,5 @@ DEFAULT_FROM_EMAIL = os.environ.get('FROM_EMAIL')
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 MEDIA_URL = '/media/'
+
+ASGI_APPLICATION = "teamG_study.asgi.application"

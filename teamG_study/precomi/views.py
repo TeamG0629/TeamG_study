@@ -44,7 +44,7 @@ class DiaryDetailView(LoginRequiredMixin, generic.DetailView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         print((self.kwargs['pk']))
-        context['commentss'] = DiaryComment.objects.filter(target=Diary.objects.get(id=self.kwargs['pk']))
+        context['comments'] = DiaryComment.objects.filter(target=Diary.objects.get(id=self.kwargs['pk']))
         return context
 
 #diary作成
@@ -188,4 +188,11 @@ class ProfileUpdateView(LoginRequiredMixin, generic.UpdateView):
     def form_invalid(self, form):
         messages.error(self.request, "プロフィールの更新に失敗しました。")
         return super().form_invalid(form)
+
+def chat_index(request):
+    return render(request, "chat_index.html")
+
+def chat_room(request, room_name):
+    return render(request, "chat_room.html", {"room_name": room_name})
+
 

@@ -4,6 +4,7 @@ from accounts.models import CustomUser
 from django.core.validators import MaxValueValidator, MinValueValidator
 from django.core.validators import RegexValidator
 
+import uuid
 
 #プロフィールモデル
 #(主キー、名前、生年月日、性別、ユーザパスワード、電話番号、妊娠周期、血液型、症状、ユーザタイプ、病院名、画像5枚、最終ログイン,コメント,緊急連絡先)
@@ -91,3 +92,20 @@ class DiaryComment(models.Model):
         return self.comment[:20]
 
 
+class Room(models.Model):
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4)
+    name = models.CharField(max_length=50)
+    created_at = models.DateTimeField(default=timezone.now)
+
+class Message(models.Model):
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4)
+    room = models.ForeignKey(
+        Room,
+        blank=True,
+        null=True,
+        related_name='room_meesages',
+        on_delete=models.CASCADE
+    )
+    name = models.CharField(max_length=50)
+    content = models.TextField()
+    created_at = models.DateTimeField(default=timezone.now)
