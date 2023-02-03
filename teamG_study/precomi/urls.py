@@ -18,6 +18,7 @@ urlpatterns = [
     path('comment/create/<int:pk>',views.CommentView.as_view(),name='comment_create'),
 
     path("chat/", views.chat_index, name="chat_index"),
-    path("chat/<str:room_name>/", views.chat_room, name="chat_room"),
+    path("chat_r/<str:room_name>/", views.chat_room, name="chat_room"),
+    path('room/', views.room, name='room'),
 
 ]

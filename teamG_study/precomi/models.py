@@ -106,6 +106,6 @@ class Message(models.Model):
         related_name='room_meesages',
         on_delete=models.CASCADE
     )
-    name = models.CharField(max_length=50)
+    name = models.CharField(max_length=50, null=True)
     content = models.TextField()
     created_at = models.DateTimeField(default=timezone.now)

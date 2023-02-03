@@ -2,9 +2,12 @@ from django.shortcuts import render,redirect,get_object_or_404
 from django.views import generic
 from .forms import UserCreateForm, DiaryCreateForm, InquiryForm ,CommentCreateForm
 from  django.contrib.auth.mixins import LoginRequiredMixin,UserPassesTestMixin
-from .models import User, Diary ,DiaryComment
+from .models import *
 from django.contrib import messages
-from django.urls import reverse_lazy
+from django.urls import reverse_lazy, reverse
+from django.template import loader
+from django.http import HttpResponseRedirect, HttpResponse
+from django.views import View
 
 #実験
 from django.views.generic.edit import CreateView
@@ -189,10 +192,33 @@ class ProfileUpdateView(LoginRequiredMixin, generic.UpdateView):
         messages.error(self.request, "プロフィールの更新に失敗しました。")
         return super().form_invalid(form)
 
+
+
+# def chat_index(request):
+#     return render(request, "chat_index.html")
+#
+# def chat_room(request, room_name):
+#     return render(request, "chat_room.html", {"room_name": room_name})
+
 def chat_index(request):
-    return render(request, "chat_index.html")
+    room_list = Room.objects.order_by('-created_at')[:5]
+    template = loader.get_template('chat_index.html')
+    context = {
+        'room_list': room_list,
+    }
+    return HttpResponse(template.render(context, request))
 
 def chat_room(request, room_name):
-    return render(request, "chat_room.html", {"room_name": room_name})
+    messages = Message.objects.filter(room__name=room_name).order_by('-created_at')[:50]
+    room = Room.objects.filter(name=room_name)[0]
+    template = loader.get_template('chat_room.html')
+    context = {
+        'messages': messages,
+        'room_name': room_name
+    }
+    return HttpResponse(template.render(context, request))
 
-
+def room(request):
+    name = request.POST.get("room_name")
+    room = Room.objects.create(name=name)
+    return HttpResponseRedirect(reverse('precomi:chat_room', args=[name]))
