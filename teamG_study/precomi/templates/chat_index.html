@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <title>Chat Rooms</title>
+</head>
+<body>
+<div class="create-room-box">
+    <form action="/room/" method="post">
+        {% csrf_token %}
+        What chat room would you like to enter?<br>
+        <input placeholder="ルームを作成" id="room-name-input" name="room_name" type="text" size="100"><br>
+        <input id="room-name-submit" type="submit" class="send" value="入室">
+    </form>
+</div>
+
+<h2>ルーム一覧</h2>
+<ul class="select-room-box">
+{% for room in room_list %}
+    <a href="/chat_r/{{ room.name }}">{{ room.name }}</a>
+{% endfor %}
+</ul>
+<!--    <script>-->
+<!--        document.querySelector('#room-name-input').focus();-->
+<!--        document.querySelector('#room-name-input').onkeyup = function(e) {-->
+<!--            if (e.keyCode === 13) {  // enter, return-->
+<!--                document.querySelector('#room-name-submit').click();-->
+<!--            }-->
+<!--        };-->
+
+<!--        document.querySelector('#room-name-submit').onclick = function(e) {-->
+<!--            var roomName = document.querySelector('#room-name-input').value;-->
+<!--            window.location.pathname = '/chat_r/' + roomName;-->
+<!--        };-->
+<!--    </script>-->
+</body>
+</html>
