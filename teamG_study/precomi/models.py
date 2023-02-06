@@ -93,12 +93,12 @@ class DiaryComment(models.Model):
 
 
 class Room(models.Model):
-    id = models.UUIDField(primary_key=True, default=uuid.uuid4)
+    id = models.AutoField(primary_key=True)
     name = models.CharField(max_length=50)
     created_at = models.DateTimeField(default=timezone.now)
 
 class Message(models.Model):
-    id = models.UUIDField(primary_key=True, default=uuid.uuid4)
+    id = models.AutoField(primary_key=True)
     room = models.ForeignKey(
         Room,
         blank=True,
@@ -106,6 +106,6 @@ class Message(models.Model):
         related_name='room_meesages',
         on_delete=models.CASCADE
     )
-    name = models.CharField(max_length=50, null=True)
+    name = models.CharField(max_length=50, null=True, blank=True)
     content = models.TextField()
     created_at = models.DateTimeField(default=timezone.now)
