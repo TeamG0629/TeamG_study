@@ -1,10 +1,10 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="utf-8"/>
-    <title>Chat Rooms</title>
-</head>
-<body>
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block header%}
+{% endblock %}
+{% block contents%}
 <div class="create-room-box">
     <form action="/room/" method="post">
         {% csrf_token %}
@@ -20,18 +20,5 @@
     <a href="/chat_r/{{ room.name }}">{{ room.name }}</a>
 {% endfor %}
 </ul>
-<!--    <script>-->
-<!--        document.querySelector('#room-name-input').focus();-->
-<!--        document.querySelector('#room-name-input').onkeyup = function(e) {-->
-<!--            if (e.keyCode === 13) {  // enter, return-->
-<!--                document.querySelector('#room-name-submit').click();-->
-<!--            }-->
-<!--        };-->
+{% endblock %}
 
-<!--        document.querySelector('#room-name-submit').onclick = function(e) {-->
-<!--            var roomName = document.querySelector('#room-name-input').value;-->
-<!--            window.location.pathname = '/chat_r/' + roomName;-->
-<!--        };-->
-<!--    </script>-->
-</body>
-</html>

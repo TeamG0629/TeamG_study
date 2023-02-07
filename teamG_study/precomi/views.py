@@ -191,15 +191,6 @@ class ProfileUpdateView(LoginRequiredMixin, generic.UpdateView):
     def form_invalid(self, form):
         messages.error(self.request, "プロフィールの更新に失敗しました。")
         return super().form_invalid(form)
-
-
-
-# def chat_index(request):
-#     return render(request, "chat_index.html")
-#
-# def chat_room(request, room_name):
-#     return render(request, "chat_room.html", {"room_name": room_name})
-
 def chat_index(request):
     room_list = Room.objects.order_by('-created_at')[:5]
     template = loader.get_template('chat_index.html')
@@ -209,11 +200,11 @@ def chat_index(request):
     return HttpResponse(template.render(context, request))
 
 def chat_room(request, room_name):
-    messages = Message.objects.filter(room__name=room_name).order_by('-created_at')[:50]
+    db_messages = Message.objects.filter(room__name=room_name).order_by('-created_at')[:50]
     room = Room.objects.filter(name=room_name)[0]
     template = loader.get_template('chat_room.html')
     context = {
-        'messages': messages,
+        'db_messages': db_messages,
         'room_name': room_name
     }
     return HttpResponse(template.render(context, request))
