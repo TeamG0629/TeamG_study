@@ -154,3 +154,12 @@
 .chat_area {
   text-align:center;
 }
+
+.chat-room-body{
+    margin-right:200px;
+    margin-left:200px;
+    margin-bottom:50px;
+}
+.msg_history{
+    width: 100%;
+}

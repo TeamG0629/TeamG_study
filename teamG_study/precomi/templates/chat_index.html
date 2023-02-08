@@ -5,12 +5,12 @@
 {% block header%}
 {% endblock %}
 {% block contents%}
-<div class="create-room-box">
+<div class="create-room-box" style="text-align:center">
     <form action="/room/" method="post">
         {% csrf_token %}
-        What chat room would you like to enter?<br>
-        <input placeholder="ルームを作成" id="room-name-input" name="room_name" type="text" size="100"><br>
-        <input id="room-name-submit" type="submit" class="send" value="入室">
+        部屋を作成しますか？<br>
+        <input placeholder="ルームを作成" id="room-name-input" name="room_name" type="text" size="100">
+        <input id="room-name-submit" type="submit" class="send" value="作成">
     </form>
 </div>
 

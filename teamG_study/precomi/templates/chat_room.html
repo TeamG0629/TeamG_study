@@ -5,29 +5,37 @@
 {% block header%}
 {% endblock %}
 {% block contents%}
-    <div>
-    <p><a href="/chat/" class="back">＜戻る</a></p>
-<!--    <textarea id="chat-log" cols="100" rows="20" readonly></textarea><br>-->
-    <div class="chat-room-body" id="chat-log">
-    {% for message in db_messages %}
-        <div class="chat-box">
-            <div class="chat-header">
-                名前：{{ message.name }}
-            </div>
-            <div class="chat-body">
-                {{message.content}}
-            </div>
-        </div>
-    {% endfor %}
-        <div id="footer"></div>
-    </div>
-    <input placeholder="メッセージを入力" id="chat-message-input" type="text" size="100">
-    <input id="chat-message-submit" type="button" value="送信">
-    {{ room_name|json_script:"room-name" }}
-    </div>
-    <script>
-        const roomName = JSON.parse(document.getElementById('room-name').textContent);
+    <div class="msg_history" id="board">
+         <div class="chat-box">
 
+            <div class="chat-header" style="text-align:center">
+                {{room_name}}
+            </div>
+             <p><a href="/chat/" class="back">＜戻る</a></p>
+        </div>
+        <div class="chat-room-body" id="chat-log">
+        {% for message in db_messages %}
+            <div class="chat-box">
+                <div class="chat-header">
+                    名前：{{ message.name }}
+                </div>
+                <div class="chat-body">
+                    {{message.content}}
+                </div>
+            </div>
+        {% endfor %}
+            <div id="footer"></div>
+        </div>
+        <div style="text-align:center">
+            <input placeholder="メッセージを入力" id="chat-message-input" type="text" size="100">
+            <input id="chat-message-submit" type="button" value="送信">
+        </div>
+
+    </div>
+    {{ room_name|json_script:"room-name" }}
+    <script>
+
+        const roomName = JSON.parse(document.getElementById('room-name').textContent);
         const chatSocket = new WebSocket(
             'ws://'
             + window.location.host
@@ -59,6 +67,7 @@
             }
         };
 
+        <!--送信ボタン押下時処理-->
         document.querySelector('#chat-message-submit').onclick = function(e) {
             const messageInputDom = document.querySelector('#chat-message-input');
             const message = messageInputDom.value;
