@@ -1,24 +1,54 @@
 {% extends 'base.html' %}
 {% load static %}
 
-
 {% block header%}
 {% endblock %}
 {% block contents%}
 <div class="create-room-box" style="text-align:center">
-    <form action="/room/" method="post">
+    <form action="/room/" method="post" name="room_form">
         {% csrf_token %}
         部屋を作成しますか？<br>
+        {% if error %}
+            {{ error }}
+        {% endif %}
         <input placeholder="ルームを作成" id="room-name-input" name="room_name" type="text" size="100">
-        <input id="room-name-submit" type="submit" class="send" value="作成">
+        <input id="room-name-submit" type="submit" class="send" value="作成" onClick="return check();">
     </form>
 </div>
 
 <h2>ルーム一覧</h2>
-<ul class="select-room-box">
-{% for room in room_list %}
-    <a href="/chat_r/{{ room.name }}">{{ room.name }}</a>
-{% endfor %}
-</ul>
+<div>
+    <table align="center" class="room_table">
+        {% for room in room_list %}
+        <td class="room_link"><a href="/chat_r/{{ room.name }}">{{ room.name }}</a></td>
+        {% endfor %}
+    </table>
+</div>
+
+{{ room_name|json_script:"room-name" }}
+    <script>
+
+        <!--同じ名前のルームを作らせない-->
+        function check(){
+                let num = 0;
+                {% for room in room_all %}
+                if (room_form.room_name.value == "{{ room.name }}"){
+                    alert("このルーム名は既に存在します");
+                    return false;
+                } else if (room_form.room_name.value == ""){
+                    alert("入力してください");
+                    return false;
+                }else{
+                    num = 1;
+                }
+                {% endfor %}
+                if (num == 1){
+                    return true;
+                } else{
+                    return false;
+                }
+        }
+    </script>
+
 {% endblock %}
 

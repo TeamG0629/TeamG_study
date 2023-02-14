@@ -1,22 +1,18 @@
 {% extends 'base.html' %}
 {% load static %}
 
-
 {% block header%}
 {% endblock %}
 {% block contents%}
     <div class="msg_history" id="board">
-         <div class="chat-box">
-
             <div class="chat-header" style="text-align:center">
                 {{room_name}}
             </div>
              <p><a href="/chat/" class="back">＜戻る</a></p>
-        </div>
         <div class="chat-room-body" id="chat-log">
         {% for message in db_messages %}
-            <div class="chat-box">
-                <div class="chat-header">
+            <div class="chat-box" id="chat_id">
+                <div class="chat-header" id="chat_hd">
                     名前：{{ message.name }}
                 </div>
                 <div class="chat-body">
@@ -26,15 +22,14 @@
         {% endfor %}
             <div id="footer"></div>
         </div>
-        <div style="text-align:center">
-            <input placeholder="メッセージを入力" id="chat-message-input" type="text" size="100">
+        <div style="text-align:center" name="chat_input">
+            <input placeholder="メッセージを入力" id="chat-message-input" name="chat_name" type="text" size="100">
             <input id="chat-message-submit" type="button" value="送信">
         </div>
 
     </div>
     {{ room_name|json_script:"room-name" }}
     <script>
-
         const roomName = JSON.parse(document.getElementById('room-name').textContent);
         const chatSocket = new WebSocket(
             'ws://'
@@ -43,6 +38,19 @@
             + roomName
             + '/'
         );
+
+<!--        window.onload = function onload(){-->
+<!--        const chatbox = document.getElementsByClassName('chat-box');-->
+<!--        const chathd = document.getElementById('chat_hd');-->
+<!--            {% for message in db_messages %}-->
+<!--            if (chathd == "{{ user.get_username }}"){-->
+<!--                chathd.style.textAlign = 'right';-->
+<!--            }else{-->
+<!--                alert("いいい");-->
+<!--                chathd.style.textAlign = 'center';-->
+<!--            }-->
+<!--            {% endfor %}-->
+<!--        }-->
 
         chatSocket.onmessage = function(e) {
             const data = JSON.parse(e.data);
@@ -76,7 +84,9 @@
                 'name':"{{ user.get_username }}"
             }));
             messageInputDom.value = '';
+
         };
+
 
     </script>
 {% endblock %}

@@ -19,19 +19,11 @@ class User(models.Model):
     no = models.AutoField(verbose_name='主キー',primary_key=True)
     name = models.CharField(max_length=20,verbose_name='名前',null=False)
     datebirth = models.DateField(verbose_name='生年月日',null=True)
-    user_pass = models.CharField(max_length=10,verbose_name='ユーザパスワード',null=False)
     tel_number_regex = RegexValidator(regex=r'^[0-9]+$', message=("半角数字のみを入力してください"))
     telnum = models.CharField(validators=[tel_number_regex], max_length=12, verbose_name='電話番号', null=False)
     precycle = models.IntegerField(validators=[MinValueValidator(8)],verbose_name='妊娠周期',null=False)
     bloodtype = models.CharField(max_length=2,verbose_name='血液型', choices=blood, null=True)
-    symptoms = models.CharField(max_length=100,verbose_name='症状',null=True)
-    user_type = models.CharField(max_length=1,verbose_name='ユーザタイプ',null=False)
-    hospitalname = models.CharField(max_length=50,verbose_name='病院名',null=True)
     image1 = models.ImageField(verbose_name='画像1',null=True)
-    image2 = models.ImageField(verbose_name='画像2',null=True)
-    image3 = models.ImageField(verbose_name='画像3',null=True)
-    image4 = models.ImageField(verbose_name='画像4',null=True)
-    image5 = models.ImageField(verbose_name='画像5',null=True)
     last_login = models.DateTimeField(max_length=8,verbose_name='最終ログイン',auto_now=True)
     comment = models.TextField(verbose_name='コメント',null=True)
     egcontact = models.EmailField(verbose_name='緊急連絡先',null=True)
@@ -69,15 +61,6 @@ class Diary(models.Model):
     def __str__(self):
         return self.title
 
-#トークチャットモデル(名前、性別、ユーザID、ユーザタイプ、画像1枚)
-class Talkchat(models.Model):
-    name = models.CharField(max_length=20,verbose_name='名前',null=False)
-    user_id = models.CharField(max_length=8,verbose_name='ユーザID',null=False)
-    user_type = models.CharField(max_length=1,verbose_name='ユーザタイプ',null=False)
-    image = models.CharField(max_length=256,verbose_name='画像',null=True)
-    class Meta:
-        db_table = 'tc_info'
-
 #コメントモデル
 
 
@@ -94,8 +77,9 @@ class DiaryComment(models.Model):
 
 class Room(models.Model):
     id = models.AutoField(primary_key=True)
-    name = models.CharField(max_length=50)
+    name = models.CharField(max_length=20)
     created_at = models.DateTimeField(default=timezone.now)
+
 
 class Message(models.Model):
     id = models.AutoField(primary_key=True)
@@ -106,6 +90,6 @@ class Message(models.Model):
         related_name='room_meesages',
         on_delete=models.CASCADE
     )
-    name = models.CharField(max_length=50, null=True, blank=True)
+    name = models.CharField(max_length=20, null=True, blank=True)
     content = models.TextField()
     created_at = models.DateTimeField(default=timezone.now)

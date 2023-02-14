@@ -17,7 +17,8 @@ urlpatterns = [
     path('alldiary/',views.AlldiaryView.as_view(),name="alldiary"),
     path('comment/create/<int:pk>',views.CommentView.as_view(),name='comment_create'),
 
-    path("chat/", views.chat_index, name="chat_index"),
+    # path("chat/", views.chat_index, name="chat_index"),
+    path('chat/', views.ChatIndexView.as_view(), name='chat_index'),
     path("chat_r/<str:room_name>/", views.chat_room, name="chat_room"),
     path('room/', views.room, name='room'),
 

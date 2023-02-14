@@ -8,13 +8,19 @@ from django.urls import reverse_lazy, reverse
 from django.template import loader
 from django.http import HttpResponseRedirect, HttpResponse
 from django.views import View
-
 #実験
 from django.views.generic.edit import CreateView
 
-
 import logging
 logger = logging.getLogger(__name__)
+
+class OnlyYouMixin(UserPassesTestMixin):
+    raise_exception = True
+
+    def test_func(self):
+        diary = get_object_or_404(Diary, pk=self.kwargs['pk'])
+        return self.request.user == diary.user
+
 
 #index.htmlに飛ばす
 class IndexView(generic.TemplateView):
@@ -40,7 +46,7 @@ class DiaryView(LoginRequiredMixin, generic.ListView):
         return diaries
 
 #diary詳細
-class DiaryDetailView(LoginRequiredMixin, generic.DetailView):
+class DiaryDetailView(LoginRequiredMixin, OnlyYouMixin, generic.DetailView):
     model = Diary
     template_name = 'diary_detail.html'
 
@@ -69,7 +75,7 @@ class DiaryCreateView(LoginRequiredMixin, generic.CreateView):
         return super().form_invalid(form)
 
 #diary更新
-class DiaryUpdateView(LoginRequiredMixin, generic.UpdateView):
+class DiaryUpdateView(LoginRequiredMixin, OnlyYouMixin, generic.UpdateView):
     model = Diary
     template_name = "diary_update.html"
     form_class = DiaryCreateForm
@@ -86,7 +92,7 @@ class DiaryUpdateView(LoginRequiredMixin, generic.UpdateView):
         return super().form_invalid(form)
 
 # #diary削除
-class DiaryDeleteView(generic.DeleteView):
+class DiaryDeleteView(LoginRequiredMixin, OnlyYouMixin, generic.DeleteView):
     model = Diary
     template_name = "diary_delete.html"
     success_url = reverse_lazy('precomi:diary')
@@ -191,21 +197,37 @@ class ProfileUpdateView(LoginRequiredMixin, generic.UpdateView):
     def form_invalid(self, form):
         messages.error(self.request, "プロフィールの更新に失敗しました。")
         return super().form_invalid(form)
-def chat_index(request):
-    room_list = Room.objects.order_by('-created_at')[:5]
-    template = loader.get_template('chat_index.html')
-    context = {
-        'room_list': room_list,
-    }
-    return HttpResponse(template.render(context, request))
+
+class ChatIndexView(LoginRequiredMixin, generic.ListView):
+    model = Room
+    template_name = "chat_index.html"
+
+    def get_context_data(self, **kwargs):
+        room_list = Room.objects.order_by('-created_at')[:6]
+        room_all = Room.objects.all()
+        context = {
+            'room_list': room_list,
+            'room_all': room_all
+        }
+        return context
+
+# def chat_index(request):
+#     room_list = Room.objects.order_by('-created_at')[:6]
+#     room_all = Room.objects.all()
+#     template = loader.get_template('chat_index.html')
+#     context = {
+#         'room_list': room_list,
+#         'room_all': room_all
+#     }
+#     return HttpResponse(template.render(context, request))
 
 def chat_room(request, room_name):
-    db_messages = Message.objects.filter(room__name=room_name).order_by('-created_at')[:50]
+    db_messages = Message.objects.filter(room__name=room_name).order_by('-created_at').reverse()[:50]
     room = Room.objects.filter(name=room_name)[0]
     template = loader.get_template('chat_room.html')
     context = {
         'db_messages': db_messages,
-        'room_name': room_name
+        'room_name': room_name,
     }
     return HttpResponse(template.render(context, request))
 
