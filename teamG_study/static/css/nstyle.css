@@ -188,3 +188,7 @@
 .chat-box{
     margin-bottom:10px;
 }
+
+.flex{
+  flex-wrap: wrap;
+}

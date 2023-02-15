@@ -14,12 +14,7 @@ from django.views.generic.edit import CreateView
 import logging
 logger = logging.getLogger(__name__)
 
-class OnlyYouMixin(UserPassesTestMixin):
-    raise_exception = True
 
-    def test_func(self):
-        diary = get_object_or_404(Diary, pk=self.kwargs['pk'])
-        return self.request.user == diary.user
 
 
 #index.htmlに飛ばす
@@ -46,7 +41,7 @@ class DiaryView(LoginRequiredMixin, generic.ListView):
         return diaries
 
 #diary詳細
-class DiaryDetailView(LoginRequiredMixin, OnlyYouMixin, generic.DetailView):
+class DiaryDetailView(LoginRequiredMixin, generic.DetailView):
     model = Diary
     template_name = 'diary_detail.html'
 
@@ -75,7 +70,7 @@ class DiaryCreateView(LoginRequiredMixin, generic.CreateView):
         return super().form_invalid(form)
 
 #diary更新
-class DiaryUpdateView(LoginRequiredMixin, OnlyYouMixin, generic.UpdateView):
+class DiaryUpdateView(LoginRequiredMixin, generic.UpdateView):
     model = Diary
     template_name = "diary_update.html"
     form_class = DiaryCreateForm
@@ -92,7 +87,7 @@ class DiaryUpdateView(LoginRequiredMixin, OnlyYouMixin, generic.UpdateView):
         return super().form_invalid(form)
 
 # #diary削除
-class DiaryDeleteView(LoginRequiredMixin, OnlyYouMixin, generic.DeleteView):
+class DiaryDeleteView(LoginRequiredMixin, generic.DeleteView):
     model = Diary
     template_name = "diary_delete.html"
     success_url = reverse_lazy('precomi:diary')

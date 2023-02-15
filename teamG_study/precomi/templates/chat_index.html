@@ -4,6 +4,17 @@
 {% block header%}
 {% endblock %}
 {% block contents%}
+<h2 style="text-align:center">ルーム一覧</h2>
+<ul style="text-align:center" class="select-room-box">
+    <select id="select-box">
+        {% for room in room_all %}
+        <a href="/chat_r/{{ room.name }}">
+            <option hidden>選択してください</option>
+            <option value="{{ room.name }}">{{ room.name }}</option>
+        </a>
+        {% endfor %}
+    </select>
+</ul>
 <div class="create-room-box" style="text-align:center">
     <form action="/room/" method="post" name="room_form">
         {% csrf_token %}
@@ -16,17 +27,15 @@
     </form>
 </div>
 
-<h2>ルーム一覧</h2>
-<div>
-    <table align="center" class="room_table">
-        {% for room in room_list %}
-        <td class="room_link"><a href="/chat_r/{{ room.name }}">{{ room.name }}</a></td>
-        {% endfor %}
-    </table>
-</div>
+
+
 
 {{ room_name|json_script:"room-name" }}
     <script>
+        const selectBox = document.getElementById("select-box"); selectBox.addEventListener("change", function() {
+        const selectedValue = selectBox.value;
+        window.location.href = "/chat_r/" + selectedValue;
+        });
 
         <!--同じ名前のルームを作らせない-->
         function check(){
