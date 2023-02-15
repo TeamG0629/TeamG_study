@@ -14,7 +14,7 @@
                 </div>
                 {% for diary in diary_list %}
                     <div class="post-preview">
-                        <a href="{% url 'precomi:diary_detail' diary.pk %}">
+                        <a href="{% url 'precomi:diary_detail' diary.pk %}" style="text-decoration: none;">
                           <h2 class="post-title">
                             {{ diary.title }}
                           </h2>

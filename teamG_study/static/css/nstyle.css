@@ -139,6 +139,7 @@
   text-align:left;
   box-sizing: border-box;
   word-wrap: break-word;
+  
 }
 
 /*日記詳細の画像サイズ*/
@@ -158,8 +159,8 @@
 }
 
 .chat-room-body{
-    margin-right:200px;
-    margin-left:200px;
+    margin-right:25%;
+    margin-left:25%;
     margin-bottom:50px;
 }
 
@@ -183,4 +184,7 @@
 
 .room_table{
    text-align:center;
+}
+.chat-box{
+    margin-bottom:10px;
 }

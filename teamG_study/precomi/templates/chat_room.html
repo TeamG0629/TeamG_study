@@ -11,14 +11,25 @@
              <p><a href="/chat/" class="back">＜戻る</a></p>
         <div class="chat-room-body" id="chat-log">
         {% for message in db_messages %}
-            <div class="chat-box" id="chat_id">
-                <div class="chat-header" id="chat_hd">
+            {% if message.name == user.get_username %}
+            <div class="chat-box" id="chat_id" style="text-align:right">
+                <div class="chat-header" id="chat_me" style="text-align:right">
                     名前：{{ message.name }}
                 </div>
-                <div class="chat-body">
+                <div class="chat-body" style="text-align:right">
                     {{message.content}}
                 </div>
             </div>
+            {% else %}
+            <div class="chat-box" id="chat_id" style="text-align:left">
+                <div class="chat-header" id="chat_you">
+                    名前：{{ message.name }}
+                </div>
+                <div class="chat-body">
+                    {{ message.content }}
+                </div>
+            </div>
+            {% endif %}
         {% endfor %}
             <div id="footer"></div>
         </div>
@@ -39,28 +50,27 @@
             + '/'
         );
 
-<!--        window.onload = function onload(){-->
-<!--        const chatbox = document.getElementsByClassName('chat-box');-->
-<!--        const chathd = document.getElementById('chat_hd');-->
-<!--            {% for message in db_messages %}-->
-<!--            if (chathd == "{{ user.get_username }}"){-->
-<!--                chathd.style.textAlign = 'right';-->
-<!--            }else{-->
-<!--                alert("いいい");-->
-<!--                chathd.style.textAlign = 'center';-->
-<!--            }-->
-<!--            {% endfor %}-->
-<!--        }-->
-
         chatSocket.onmessage = function(e) {
             const data = JSON.parse(e.data);
             document.querySelector('#chat-log').value += (data.message + '\n');
-
             var messageBox = document.createElement('div')
             messageBox.className = 'chat-box'
-            var header = '<div class="chat-header">名前：' + data.name + '</div>'
-            var body = '<div class="chat-body">' + data.message + '</div>'
-            document.getElementById('footer').insertAdjacentHTML('beforebegin', header + body)
+            var text_style = 0;
+            if (data.name == "{{ user.get_username }}") {
+               text_style = 1;
+            } else {
+                text_style = 2;
+            }
+            if (text_style == 1){
+                var box = '<div class="chat-box" style="text-align:right">' + '<div class="chat-header">名前：' +
+                data.name + '</div>' + '<div class="chat-body" style="margin-bottom:10px">' +
+                data.message + '</div>' + '</div>';
+            } else {
+                var box = '<div class="chat-box" style="text-align:left">' + '<div class="chat-header">名前：' +
+                data.name + '</div>' + '<div class="chat-body" style="margin-bottom:10px">' +
+                data.message + '</div>' + '</div>';
+            }
+            document.getElementById('footer').insertAdjacentHTML('beforebegin', box)
             document.getElementById('footer').appendChild(messageBox)
         };
 
@@ -84,9 +94,6 @@
                 'name':"{{ user.get_username }}"
             }));
             messageInputDom.value = '';
-
         };
-
-
     </script>
 {% endblock %}

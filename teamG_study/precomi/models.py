@@ -3,7 +3,6 @@ from django.utils import timezone
 from accounts.models import CustomUser
 from django.core.validators import MaxValueValidator, MinValueValidator
 from django.core.validators import RegexValidator
-
 import uuid
 
 #プロフィールモデル
@@ -35,8 +34,6 @@ class User(models.Model):
     def __str__(self):
         return self.user
 
-
-
 #日記モデル(画像5枚、タイトル、コメント、日付、公開非公開設定、公開用ネーム設定)
 class Diary(models.Model):
     IS_USED_CHOICES = (
@@ -61,9 +58,6 @@ class Diary(models.Model):
     def __str__(self):
         return self.title
 
-#コメントモデル
-
-
 #日記コメント(名前、コメント、日時、対象コメント)
 class DiaryComment(models.Model):
     name = models.CharField('名前',max_length=255,default='名無し')
@@ -74,12 +68,10 @@ class DiaryComment(models.Model):
     def __str__(self):
         return self.comment[:20]
 
-
 class Room(models.Model):
     id = models.AutoField(primary_key=True)
     name = models.CharField(max_length=20)
     created_at = models.DateTimeField(default=timezone.now)
-
 
 class Message(models.Model):
     id = models.AutoField(primary_key=True)
